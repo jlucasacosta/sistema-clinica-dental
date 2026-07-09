@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Fallbacks en triplete "R G B". El layout inyecta los valores reales del theme (ESMALTE). */
+  --primary: 14 124 102;
+  --accent: 242 106 90;
+  --bg: 243 246 245;
+  --surface: 255 255 255;
+  --fg: 20 37 35;
+  --muted: 92 107 104;
+  --border: 221 229 227;
+  --subtle: 234 240 238;
+  --success: 21 128 61;
+  --warning: 180 83 9;
+  --danger: 200 30 30;
+  --info: 37 99 235;
+  --radius: 16px;
+  --pad: 20px;
+  --badge-radius: 4px;
+  --card-border: 0 solid transparent;
+  --font-heading: system-ui, sans-serif;
+  --font-body: system-ui, sans-serif;
+
+  --shadow-sm: none;
+  --shadow-card: none;
+  --shadow-pop: none;
+}
+
+/* La scrollbar es parte del diseño, no un accidente del navegador. */
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--border)) transparent;
+  }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--border));
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--primary) / 0.6);
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-corner { background: transparent; }
+}
+
+@layer components {
+  /* elevation: raised -> la tarjeta flota sobre el chasis. SaaS clinico calido. */
+  .surface-card {
+    background: rgb(var(--surface));
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    border: var(--card-border);
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: var(--badge-radius);
+    padding: 0.125rem 0.5rem;
+    font-size: 0.68rem;
+    line-height: 1.05rem;
+    letter-spacing: 0.02em;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .dato {
+    font-variant-numeric: tabular-nums;
+  }
+  /* El numero FDI de la pieza. Chico, tabular, siempre bajo el diente. */
+  .fdi {
+    font-family: var(--font-heading);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+  /* Se opera con guantes de nitrilo: ningun target clickeable baja de 44px. */
+  .target {
+    min-height: 44px;
+  }
+  /* La trama de la pieza ausente y de las bandas de montaje / esterilizacion.
+     Una franja diagonal de 6px, hecha con el color del token que le pasen. */
+  .trama {
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgb(var(--muted) / 0.18) 0,
+      rgb(var(--muted) / 0.18) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+  }
+}
+
+/* El odontograma se arma pieza por pieza cuando entra. */
+@keyframes brotar {
+  from { transform: translateY(6px) scale(0.9); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+.brotando { animation: brotar 320ms cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+
+/* La cara que cambia de estado late una vez. Es el frame que se graba. */
+@keyframes pulso-cara {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+.cara-cambiada { animation: pulso-cara 420ms ease-out; transform-origin: center; transform-box: fill-box; }
+
+/* El contador de piezas afectadas sube. */
+@keyframes subir-contador {
+  from { transform: translateY(8px); opacity: 0; }
+}
+.contador-sube { animation: subir-contador 300ms ease-out; }
+
+/* El turno ausente late: el sillon quedo vacio y eso es la plata del dia. */
+@keyframes latir-ausente {
+  0%, 100% { box-shadow: inset 0 0 0 1px rgb(var(--danger) / 0.5); }
+  50% { box-shadow: inset 0 0 0 3px rgb(var(--danger) / 0.8); }
+}
+.turno-ausente { animation: latir-ausente 1.4s ease-in-out infinite; }
+
+/* Las piezas repintan cuando el scrubber del timelapse se mueve. */
+.pieza-cara {
+  transition: fill 300ms ease, stroke 300ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brotando, .cara-cambiada, .contador-sube, .turno-ausente { animation: none; }
+  .pieza-cara { transition: none; }
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body { font-family: var(--font-body); }
+h1, h2, h3 { font-family: var(--font-heading); letter-spacing: -0.015em; }
