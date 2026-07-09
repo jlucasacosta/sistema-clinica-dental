@@ -2,9 +2,15 @@ node_modules/
 .next/
 dist/
 out/
-.env
-.env.*
-!.env.example
+.vercel
 *.local
 *.log
 .DS_Store
+
+# Secrets: se ignora todo .env, MENOS el ejemplo con placeholders vacios.
+# La negacion va DESPUES de los patrones que lo incluyen, o no aplica.
+# OJO: `vercel link` appendea `.env*` al final de este archivo. Si lo deja,
+# vuelve a ignorar .env.example. Borrar esa linea despues de linkear.
+.env
+.env.*
+!.env.example
