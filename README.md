@@ -7,7 +7,7 @@ Un sistema de gestión para consultorios odontológicos: el **odontograma** con 
 ---
 
 ## Demo en vivo
-👉 (pendiente de deploy)
+👉 https://sistema-clinica-dental.vercel.app
 
 ## Sumate a la comunidad (gratis)
 
