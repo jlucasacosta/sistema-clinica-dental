@@ -119,6 +119,10 @@ export function DashboardPage() {
         <ul className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
           {recall.map((r) => {
             const nivel = nivelDeRecall(r.dias)
+            // Estar en esta lista YA es un motivo de contacto (plan sin terminar,
+            // protesis sin retirar). Un chip verde "al dia" al lado de "conducto sin
+            // terminar" dice lo contrario de lo que pasa: el piso es warning.
+            const chip = nivel === "al dia" ? "bg-warning/15 text-warning" : chipRecall[nivel]
             return (
               <li key={r.id} className="flex items-center gap-3 rounded-xl border border-border p-3">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/15 font-heading text-sm font-bold text-primary">
@@ -130,7 +134,7 @@ export function DashboardPage() {
                   <p className="dato text-[10px] text-muted">{r.telefono}</p>
                 </div>
                 <div className="flex flex-col items-end gap-1">
-                  <span className={"chip " + chipRecall[nivel]}>{r.dias} d</span>
+                  <span className={"chip " + chip}>{r.dias} d</span>
                   <PhoneCall size={14} strokeWidth={1.5} className="text-muted" />
                 </div>
               </li>

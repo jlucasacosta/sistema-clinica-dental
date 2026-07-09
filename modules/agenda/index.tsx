@@ -144,17 +144,24 @@ export function AgendaPage() {
       <div className="grid gap-4 xl:grid-cols-[1fr_17rem]">
         <div className="surface-card overflow-x-auto p-4">
           <div className="flex min-w-[44rem] gap-2">
-            {/* eje de horas: continuo, no slots */}
-            <div className="relative w-12 shrink-0" style={{ height: ALTO + "rem" }}>
-              {horas.map((m) => (
-                <span
-                  key={m}
-                  style={{ top: pct(m) + "%" }}
-                  className="dato absolute right-1 -translate-y-1/2 text-[10px] text-muted"
-                >
-                  {hhmm(m)}
-                </span>
-              ))}
+            {/* eje de horas: continuo, no slots.
+                El espaciador replica el alto del rotulo "Sillon N" de las columnas:
+                sin el, el eje corre mas arriba que los bloques y las horas mienten. */}
+            <div className="w-12 shrink-0">
+              <p aria-hidden className="mb-1.5 select-none text-center text-[11px] font-semibold text-transparent">
+                .
+              </p>
+              <div className="relative" style={{ height: ALTO + "rem" }}>
+                {horas.map((m) => (
+                  <span
+                    key={m}
+                    style={{ top: pct(m) + "%" }}
+                    className="dato absolute right-1 -translate-y-1/2 text-[10px] text-muted"
+                  >
+                    {hhmm(m)}
+                  </span>
+                ))}
+              </div>
             </div>
 
             {sillones.map((s) => (

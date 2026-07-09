@@ -144,7 +144,10 @@ export function OrdenesPage() {
         </ul>
 
         {ficha && piezaHeroe && (
-          <div className="space-y-4">
+          // min-w-0: un item de grid trae `min-width:auto` y se niega a encoger por
+          // debajo de su contenido. Sin esto el panel del plan se sale del `main`,
+          // que lo recorta con overflow-x-hidden y lo esconde sin dejar scrollbar.
+          <div className="min-w-0 space-y-4">
             {/* banner de paciente: la estructura de pagina del sistema */}
             <div className="surface-card flex flex-wrap items-center gap-4 p-4">
               <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary/15 font-heading text-xl font-bold text-primary">
@@ -172,7 +175,7 @@ export function OrdenesPage() {
             </div>
 
             <div className="grid gap-4 lg:grid-cols-[1fr_15rem]">
-              <div className="surface-card p-4">
+              <div className="surface-card min-w-0 p-4">
                 <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
                   <h3 className="font-heading text-sm font-bold">Odontograma</h3>
                   <div className="flex items-center gap-1.5">
