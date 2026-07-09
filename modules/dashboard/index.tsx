@@ -82,7 +82,7 @@ export function DashboardPage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="font-heading text-2xl font-bold tracking-tight">Jornada</h1>
+      <h1 className="font-heading text-2xl font-bold tracking-tight">Panel general</h1>
 
       <div className="surface-card p-4">
         <h2 className="mb-2 font-heading text-sm font-bold">Proximos turnos</h2>
@@ -111,7 +111,7 @@ export function DashboardPage() {
 
       <div className="surface-card p-4">
         <div className="mb-3 flex items-baseline justify-between">
-          <h2 className="font-heading text-sm font-bold">Pacientes a llamar</h2>
+          <h2 className="font-heading text-sm font-bold">Seguimiento de pacientes</h2>
           <p className="text-[10px] text-muted">
             recall a los {theme.recall.alerta} dias · perdido a los {theme.recall.vencido}
           </p>

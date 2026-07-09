@@ -5,7 +5,7 @@ export type NavItem = { label: string; href: string; icon: LucideIcon }
 // "Fichas" es /ordenes: en una clinica la orden de trabajo ES la ficha clinica.
 // La agenda va segunda: manda funcionalmente, pero la estrella vive en la ficha.
 export const nav: NavItem[] = [
-  { label: "Jornada", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Panel", href: "/dashboard", icon: LayoutDashboard },
   { label: "Agenda", href: "/agenda", icon: CalendarClock },
   { label: "Fichas", href: "/ordenes", icon: Stethoscope },
   { label: "Mensajes", href: "/conversaciones", icon: MessageSquare },

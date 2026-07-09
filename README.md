@@ -19,9 +19,9 @@ Estás aprendiendo a crear sistemas como este con Claude Code, entrá a la comun
 
 ## Qué incluye
 - Fichas: el **odontograma interactivo** — las 32 piezas numeradas con el sistema FDI, cada una con sus 5 caras. Tocás una cara y cambia de estado (sana, caries, obturada, corona, endodoncia, ausente, a extraer)
-- **Odontograma timelapse**: arrastrás el control del historial y ves la boca del paciente cambiar visita por visita. Una caries que se obtura, una pieza que se extrae
+- **Historial del odontograma**: arrastrás el control del historial y ves la boca del paciente cambiar visita por visita. Una caries que se obtura, una pieza que se extrae
 - Agenda: un día, una columna por sillón, y cada turno ocupa el sillón durante **montaje + atención + esterilización**. El tiempo es continuo: un hueco de 20 minutos se ve como un hueco de 20 minutos
-- Jornada: el estado de los turnos del día en una sola barra, la ocupación de cada sillón y la producción del mes
+- Panel general: el estado de los turnos del día en una sola barra, la ocupación de cada sillón y la producción del mes
 - Pacientes: el padrón con la obra social y a quién hay que llamar
 - Mensajes: cada hilo atado a un motivo clínico
 - Configuración

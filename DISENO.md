@@ -17,7 +17,7 @@ Lo que se rompe si el dato llega tarde: el **no-show** (sillón vacío = hora mu
 Acá hubo una contradicción real entre el estratega y el productor, y el abogado del diablo la resolvió: **no compiten, viven en planos distintos.**
 
 - **Funcionalmente manda la agenda.** La clínica factura por sillón ocupado; cada hueco es plata perdida. Es el caballo de trabajo de la secretaria y merece ser el módulo más pulido.
-- **Visualmente NO puede protagonizar.** Sillón + turnos + `light` es exactamente la barbería (#03, "La Silla"). Si el reel abre con columnas de sillones, el sistema se confunde con el de la barbería y este pasa a ser el video más flojo de la serie.
+- **Visualmente NO puede protagonizar.** Sillón + turnos + `light` es exactamente la barbería (#03, su grilla semanal por barbero). Si el reel abre con columnas de sillones, el sistema se confunde con el de la barbería y este pasa a ser el video más flojo de la serie.
 
 **Resolución:** la agenda es central en el uso e **invisible en cámara**. El **componente estrella y el frame-firma viven en `ordenes` (la ficha clínica)**, sobre el odontograma — el único activo que ningún otro sistema de la colección puede imitar.
 
@@ -44,13 +44,13 @@ El abogado exigió que el primary **lea verde-menta y no cyan**, para no ecoar e
 | Módulo | Arquetipo | Qué es |
 |---|---|---|
 | **ordenes** (fichas) ⭐ | `odontograma-interactivo` (NUEVO) | mapa anatómico FDI de 32 piezas en 4 cuadrantes. Cada pieza es un SVG de **5 caras clickeables por separado** (oclusal, vestibular, lingual, mesial, distal). Click en una cara cicla su estado. **No es una grilla de 32 celdas: es un diagrama espacial** |
-| **agenda** | `agenda-sillon-ciclo` (NUEVO) | un solo día, columnas = sillones físicos, eje Y de **tiempo continuo** (no slots fijos). Cada turno es un bloque **tri-banda**: montaje (rayado) / atención (sólido) / esterilización (rayado). Codifica el **ciclo del box**, no "ocupado". Un riel de color por dentista ata sus bloques entre columnas |
+| **agenda** | `agenda-sillon-ciclo` (NUEVO) | un solo día, columnas = sillones físicos, eje Y de **tiempo continuo** (no slots fijos). Cada turno es un bloque **tri-banda**: montaje (rayado) / atención (sólido) / esterilización (rayado). Codifica el **ciclo del sillon**, no "ocupado". Un riel de color por dentista ata sus bloques entre columnas |
 | **dashboard** | `tablero-jornada` (NUEVO) | riel de próximos turnos + `barra-estado-jornada` + `donut` de producción + alertas de recall |
 | **conversaciones** | `master-detail` | hilos + panel |
 | **contactos** | `tabla-densa` | padrón de pacientes con obra social y última visita |
 | **config** | `acordeon` | plomería. Reuso invisible: config no es héroe |
 
-**Condición bloqueante sobre la agenda:** las tres defensas son *load-bearing*. Si el bloque de turno colapsa a un rectángulo de color plano, `agenda-sillon-ciclo` **es** La Silla de la barbería con otro eje, y queda **vetado**. La tri-banda, el eje continuo y el riel del dentista no son adorno: son lo que lo hace otro arquetipo.
+**Condición bloqueante sobre la agenda:** las tres defensas son *load-bearing*. Si el bloque de turno colapsa a un rectángulo de color plano, `agenda-sillon-ciclo` **es** la grilla semanal de la barbería con otro eje, y queda **vetado**. La tri-banda, el eje continuo y el riel del dentista no son adorno: son lo que lo hace otro arquetipo.
 
 ## KPI · Gráfico · Iconos · Estructura
 - **KPI: `barra-estado-jornada`** (NUEVO) — una sola barra horizontal partida en segmentos **proporcionales** al conteo de cada estado del día (atendidos / en curso / ausentes / cancelados), con el número adentro del segmento. No es `barra-metas` (#01), que mide progreso contra un objetivo: esto es un **ratio apilado multi-estado**.
@@ -59,7 +59,7 @@ El abogado exigió que el primary **lea verde-menta y no cyan**, para no ecoar e
 - **Iconos: `lucide-fino`** (strokeWidth 1.5) — precisión clínica. Distinto del `icon-chip` del vecino #06.
 - **Estructura: `sidebar-con-banner-de-paciente`** — en las fichas, un banner con inicial tintada, edad, obra social y las **alertas médicas** en chips de `danger`.
 
-## Componente estrella — Odontograma Timelapse (`odontograma-timelapse`)
+## Componente estrella — Historial del odontograma (`odontograma-timelapse`)
 Vive en **ordenes** (la ficha clínica). Debajo del odontograma hay un **scrubber temporal**: un `input[range]` que indexa las visitas del paciente. Al arrastrarlo, las 32 piezas **repintan su estado histórico** con `transition: fill .3s`.
 
 **Interacción grabable:** se arrastra el slider y se ve, en cámara, una caries volverse obturada, y una pieza marcada *a extraer* pasar a *ausente*. La historia clínica en capas temporales, animándose en vivo. Es el mismo canvas SVG del odontograma pero en modo lectura, no edición.

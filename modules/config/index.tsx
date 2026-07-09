@@ -56,7 +56,7 @@ export function ConfigPage() {
           </Seccion>
 
           <Seccion
-            titulo="Dominio: el ciclo del box"
+            titulo="Dominio: ciclo del sillon"
             nota="El bloque de la agenda dibuja estas dos bandas alrededor de la atencion. Subi la esterilizacion y toda la grilla se aprieta."
           >
             <Fila label="Montaje" value={`${theme.ciclo.montaje} min`} />

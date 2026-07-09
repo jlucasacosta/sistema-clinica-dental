@@ -240,7 +240,7 @@ export function AgendaPage() {
                   <dd className="dato text-right font-medium">{turno.fichaId}</dd>
                 </div>
                 <div className="flex justify-between gap-2">
-                  <dt className="text-muted">Ciclo del box</dt>
+                  <dt className="text-muted">Ciclo del sillon</dt>
                   <dd className="dato text-right font-medium">
                     {theme.ciclo.montaje} + {turno.duracion} + {theme.ciclo.esterilizacion} min
                   </dd>
