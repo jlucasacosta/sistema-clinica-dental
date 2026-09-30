@@ -9,11 +9,11 @@ Un sistema de gestión para consultorios odontológicos: el **odontograma** con 
 ## Demo en vivo
 👉 https://sistema-clinica-dental.vercel.app
 
-## Sumate a la comunidad (gratis)
+## Sumate al Club de la IA
 
-Estás aprendiendo a crear sistemas como este con Claude Code, entrá a la comunidad gratuita de WhatsApp. Ahí comparto cómo se hacen desde cero.
+Aprendé a crear tu Agencia de IA y conseguir tu primer cliente. Eso lo trabajamos adentro del Club de la IA, nuestro Skool privado.
 
-👉 https://chat.whatsapp.com/DExFTzgVMO5Ka9BG1cShDH
+👉 https://www.skool.com/club-de-la-ia-8047/about
 
 ---
 
@@ -71,6 +71,6 @@ Probá algo concreto: en ese archivo, subí `ciclo.esterilizacion` de `20` a `45
 
 ## Te trabaste
 
-Si algo no te salió, preguntá en la comunidad:
+Si algo no te salió, preguntá en el Club de la IA:
 
-👉 https://chat.whatsapp.com/DExFTzgVMO5Ka9BG1cShDH
+👉 https://www.skool.com/club-de-la-ia-8047/about
