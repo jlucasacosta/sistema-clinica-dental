@@ -2,10 +2,13 @@
 import { useEffect, useState } from "react"
 import { AlertTriangle } from "lucide-react"
 import { getPacientes, type Paciente } from "./api"
-import { chipOS, chipRecall, nivelDeRecall } from "@/shell/dental"
+import { chipOS, chipRecall, nivelDeRecall, rotuloOS } from "@/shell/dental"
 
 // tabla-densa: el padron de pacientes. Arquetipo de soporte, no el protagonista.
 // El protagonista es el odontograma. Aca recepcion busca a quien hay que llamar.
+
+// Busqueda sin tildes ni mayusculas: "circulo" encuentra "Círculo Salud".
+const norm = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()
 
 export function ContactosPage() {
   const [pacientes, setPacientes] = useState<Paciente[]>([])
@@ -17,8 +20,7 @@ export function ContactosPage() {
 
   const visibles = pacientes.filter(
     (p) =>
-      p.nombre.toLowerCase().includes(q.toLowerCase()) ||
-      p.obraSocial.toLowerCase().includes(q.toLowerCase()),
+      norm(p.nombre).includes(norm(q)) || norm(p.obraSocial).includes(norm(q)),
   )
   const aLlamar = pacientes.filter((p) => nivelDeRecall(p.diasDesdeVisita) !== "al dia").length
 
@@ -28,7 +30,7 @@ export function ContactosPage() {
         <div>
           <h1 className="font-heading text-2xl font-bold tracking-tight">Pacientes</h1>
           <p className="text-[0.6875rem] text-muted">
-            {pacientes.length} en el padron · <span className="text-warning">{aLlamar} para llamar</span>
+            {pacientes.length} en el padrón · <span className="text-warning">{aLlamar} para llamar</span>
           </p>
         </div>
         <input
@@ -49,8 +51,8 @@ export function ContactosPage() {
               <th scope="col" className="px-4 py-2.5 font-semibold">Paciente</th>
               <th scope="col" className="px-4 py-2.5 font-semibold">Contacto</th>
               <th scope="col" className="px-4 py-2.5 font-semibold">Obra social</th>
-              <th scope="col" className="px-4 py-2.5 font-semibold">Autorizacion</th>
-              <th scope="col" className="px-4 py-2.5 font-semibold">Ultima visita</th>
+              <th scope="col" className="px-4 py-2.5 font-semibold">Autorización</th>
+              <th scope="col" className="px-4 py-2.5 font-semibold">Última visita</th>
               <th scope="col" className="px-4 py-2.5 font-semibold">Recall</th>
             </tr>
           </thead>
@@ -68,7 +70,7 @@ export function ContactosPage() {
                     </span>
                     {p.alertas > 0 && (
                       <span
-                        title={`${p.alertas} alerta(s) medica(s)`}
+                        title={`${p.alertas} alerta(s) médica(s)`}
                         className="chip bg-danger/15 text-danger"
                       >
                         <AlertTriangle aria-hidden size={10} strokeWidth={1.5} /> {p.alertas}
@@ -83,7 +85,7 @@ export function ContactosPage() {
                 </td>
                 <td className="px-4 py-2 text-[0.6875rem] text-muted">{p.obraSocial}</td>
                 <td className="px-4 py-2">
-                  <span className={"chip " + chipOS[p.estadoOS]}>{p.estadoOS}</span>
+                  <span className={"chip " + chipOS[p.estadoOS]}>{rotuloOS[p.estadoOS]}</span>
                 </td>
                 <td className="dato px-4 py-2 text-[0.6875rem] text-muted">{p.ultimaVisita}</td>
                 <td className="px-4 py-2">

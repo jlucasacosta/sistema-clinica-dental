@@ -2,19 +2,19 @@
   "sillones": [
     {
       "id": "S1",
-      "nombre": "Sillon 1"
+      "nombre": "Sillón 1"
     },
     {
       "id": "S2",
-      "nombre": "Sillon 2"
+      "nombre": "Sillón 2"
     },
     {
       "id": "S3",
-      "nombre": "Sillon 3"
+      "nombre": "Sillón 3"
     },
     {
       "id": "S4",
-      "nombre": "Sillon 4"
+      "nombre": "Sillón 4"
     }
   ],
   "dentistas": [
@@ -54,7 +54,7 @@
       "inicio": 580,
       "duracion": 60,
       "estado": "atendido",
-      "obraSocial": "Prevencion Sur"
+      "obraSocial": "Prevención Sur"
     },
     {
       "id": "T-03",
@@ -62,11 +62,11 @@
       "dentistaId": "D1",
       "paciente": "Ramiro Cuestas",
       "fichaId": "F-1047",
-      "tratamiento": "Obturacion 16",
+      "tratamiento": "Obturación 16",
       "inicio": 670,
       "duracion": 50,
       "estado": "en sala",
-      "obraSocial": "Circulo Salud"
+      "obraSocial": "Círculo Salud"
     },
     {
       "id": "T-04",
@@ -86,7 +86,7 @@
       "dentistaId": "D1",
       "paciente": "Martina Sobrero",
       "fichaId": "F-1042",
-      "tratamiento": "Obturacion 17",
+      "tratamiento": "Obturación 17",
       "inicio": 940,
       "duracion": 50,
       "estado": "ausente",
@@ -102,7 +102,7 @@
       "inicio": 1040,
       "duracion": 40,
       "estado": "confirmado",
-      "obraSocial": "Prevencion Sur"
+      "obraSocial": "Prevención Sur"
     },
     {
       "id": "T-07",
@@ -114,7 +114,7 @@
       "inicio": 480,
       "duracion": 80,
       "estado": "atendido",
-      "obraSocial": "Circulo Salud"
+      "obraSocial": "Círculo Salud"
     },
     {
       "id": "T-08",
@@ -122,7 +122,7 @@
       "dentistaId": "D2",
       "paciente": "Ezequiel Pombo",
       "fichaId": "F-1045",
-      "tratamiento": "Extraccion 27",
+      "tratamiento": "Extracción 27",
       "inicio": 600,
       "duracion": 70,
       "estado": "atendido",
@@ -134,11 +134,11 @@
       "dentistaId": "D2",
       "paciente": "Abril Nardelli",
       "fichaId": "F-1046",
-      "tratamiento": "Extraccion cordal 28",
+      "tratamiento": "Extracción cordal 28",
       "inicio": 710,
       "duracion": 90,
       "estado": "en sala",
-      "obraSocial": "Prevencion Sur"
+      "obraSocial": "Prevención Sur"
     },
     {
       "id": "T-10",
@@ -146,11 +146,11 @@
       "dentistaId": "D2",
       "paciente": "Ignacio Zabaleta",
       "fichaId": "F-1052",
-      "tratamiento": "Endodoncia 36, sesion 2",
+      "tratamiento": "Endodoncia 36, sesión 2",
       "inicio": 860,
       "duracion": 80,
       "estado": "confirmado",
-      "obraSocial": "Circulo Salud"
+      "obraSocial": "Círculo Salud"
     },
     {
       "id": "T-11",
@@ -174,7 +174,7 @@
       "inicio": 520,
       "duracion": 40,
       "estado": "atendido",
-      "obraSocial": "Prevencion Sur"
+      "obraSocial": "Prevención Sur"
     },
     {
       "id": "T-13",
@@ -182,7 +182,7 @@
       "dentistaId": "D3",
       "paciente": "Federico Olguin",
       "fichaId": "F-1055",
-      "tratamiento": "Obturacion 24",
+      "tratamiento": "Obturación 24",
       "inicio": 590,
       "duracion": 50,
       "estado": "cancelado",
@@ -194,11 +194,11 @@
       "dentistaId": "D3",
       "paciente": "Antonella Prieto",
       "fichaId": "F-1056",
-      "tratamiento": "Control post extraccion",
+      "tratamiento": "Control post extracción",
       "inicio": 680,
       "duracion": 20,
       "estado": "atendido",
-      "obraSocial": "Circulo Salud"
+      "obraSocial": "Círculo Salud"
     },
     {
       "id": "T-15",
@@ -206,7 +206,7 @@
       "dentistaId": "D3",
       "paciente": "Diego Aramburu",
       "fichaId": "F-1057",
-      "tratamiento": "Ferula de descarga",
+      "tratamiento": "Férula de descarga",
       "inicio": 780,
       "duracion": 40,
       "estado": "confirmado",
@@ -222,7 +222,7 @@
       "inicio": 880,
       "duracion": 40,
       "estado": "confirmado",
-      "obraSocial": "Prevencion Sur"
+      "obraSocial": "Prevención Sur"
     },
     {
       "id": "T-17",
@@ -242,7 +242,7 @@
       "dentistaId": "D1",
       "paciente": "Lautaro Bidegain",
       "fichaId": "F-1048",
-      "tratamiento": "Conducto 36, sesion 2",
+      "tratamiento": "Conducto 36, sesión 2",
       "inicio": 540,
       "duracion": 70,
       "estado": "ausente",
@@ -258,7 +258,7 @@
       "inicio": 720,
       "duracion": 60,
       "estado": "confirmado",
-      "obraSocial": "Circulo Salud"
+      "obraSocial": "Círculo Salud"
     },
     {
       "id": "T-20",
@@ -270,7 +270,7 @@
       "inicio": 1020,
       "duracion": 40,
       "estado": "confirmado",
-      "obraSocial": "Prevencion Sur"
+      "obraSocial": "Prevención Sur"
     }
   ]
 }

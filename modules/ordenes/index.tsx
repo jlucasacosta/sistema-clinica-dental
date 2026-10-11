@@ -7,6 +7,7 @@ import {
   ESTADOS,
   chipEstado,
   chipOS,
+  rotuloOS,
   estadoDePieza,
   esPatologica,
   nombrePieza,
@@ -46,7 +47,7 @@ function BarraPlan({ ficha }: { ficha: Ficha }) {
       {abandonado && (
         <p className="mt-1.5 flex items-center gap-1 text-[0.6875rem] font-semibold text-danger">
           <AlertTriangle size={12} strokeWidth={1.5} />
-          Plan abandonado: {ficha.diasSinSesion} dias sin sesion
+          Plan abandonado: {ficha.diasSinSesion} días sin sesión
         </p>
       )}
     </div>
@@ -119,9 +120,9 @@ export function OrdenesPage() {
       </p>
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="font-heading text-2xl font-bold tracking-tight">Fichas clinicas</h1>
+          <h1 className="font-heading text-2xl font-bold tracking-tight">Fichas clínicas</h1>
           <p className="text-[0.6875rem] text-muted">
-            Toca una cara para cambiar su estado. Arrastra el historial para ver la boca en el tiempo.
+            Tocá una cara para cambiar su estado. Arrastrá el historial para ver la boca en el tiempo.
           </p>
         </div>
       </div>
@@ -162,11 +163,11 @@ export function OrdenesPage() {
               <div className="min-w-0 flex-1">
                 <h2 className="font-heading text-lg font-bold leading-tight">{ficha.paciente}</h2>
                 <p className="dato text-[0.6875rem] text-muted">
-                  {ficha.edad} años · {ficha.obraSocial} · ultima visita {ficha.ultimaVisita}
+                  {ficha.edad} años · {ficha.obraSocial} · última visita {ficha.ultimaVisita}
                 </p>
                 <div className="mt-1.5 flex flex-wrap gap-1.5">
                   <span className={"chip " + chipOS[ficha.estadoOS]}>
-                    obra social {ficha.estadoOS}
+                    obra social {rotuloOS[ficha.estadoOS]}
                   </span>
                   {ficha.alertas.map((a) => (
                     <span key={a} className="chip bg-danger/15 text-danger">
@@ -223,7 +224,7 @@ export function OrdenesPage() {
                 <div className="mt-5 border-t border-border pt-4">
                   <div className="flex items-baseline justify-between">
                     <p className="text-[0.6875rem] font-semibold uppercase tracking-wide text-muted">
-                      Historial clinico
+                      Historial clínico
                     </p>
                     <p className="dato text-[0.6875rem] text-muted">
                       visita {visita + 1} de {ficha.visitas.length}
@@ -235,7 +236,7 @@ export function OrdenesPage() {
                     max={ficha.visitas.length - 1}
                     step={1}
                     value={visita}
-                    aria-label="Linea de tiempo de la historia clinica"
+                    aria-label="Línea de tiempo de la historia clínica"
                     aria-valuetext={`Visita ${visita + 1} de ${ficha.visitas.length}, ${ficha.visitas[visita].fecha}`}
                     onChange={(e) => {
                       setVisita(Number(e.target.value))
@@ -257,7 +258,7 @@ export function OrdenesPage() {
               {/* la PIEZA HEROE + el contador que sube */}
               <div className="surface-card flex flex-col gap-4 p-4">
                 <div>
-                  <p className="text-[0.6875rem] uppercase tracking-wide text-muted">Piezas con patologia</p>
+                  <p className="text-[0.6875rem] uppercase tracking-wide text-muted">Piezas con patología</p>
                   <p key={afectadas} aria-live="polite" className="contador-sube font-heading text-4xl font-bold leading-none text-danger">
                     {afectadas}
                   </p>
@@ -266,7 +267,7 @@ export function OrdenesPage() {
                 <div className="border-t border-border pt-3">
                   <p className="text-[0.6875rem] font-semibold">{nombrePieza(piezaHeroe.fdi)}</p>
                   <p className="mb-2 text-[0.6875rem] text-muted">
-                    {modo === "editar" ? "toca una cara para cambiarla" : "modo lectura"}
+                    {modo === "editar" ? "tocá una cara para cambiarla" : "modo lectura"}
                   </p>
                   <PiezaHeroe
                     pieza={piezaHeroe}

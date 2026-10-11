@@ -10,5 +10,5 @@ export const nav: NavItem[] = [
   { label: "Fichas", href: "/ordenes", icon: Stethoscope },
   { label: "Mensajes", href: "/conversaciones", icon: MessageSquare },
   { label: "Pacientes", href: "/contactos", icon: Users },
-  { label: "Configuracion", href: "/config", icon: Settings },
+  { label: "Configuración", href: "/config", icon: Settings },
 ]

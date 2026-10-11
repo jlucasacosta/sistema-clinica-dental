@@ -141,7 +141,7 @@ export function AgendaPage() {
         <div>
           <h1 className="font-heading text-2xl font-bold tracking-tight">Agenda de hoy</h1>
           <p className="text-[0.6875rem] text-muted">
-            Cada columna es un sillon. El bloque ocupa montaje + atencion + esterilizacion.
+            Cada columna es un sillón. El bloque ocupa montaje + atención + esterilización.
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-4">
@@ -226,7 +226,7 @@ export function AgendaPage() {
 
           <div className="mt-3 flex flex-wrap gap-4 border-t border-border pt-3 text-[0.6875rem] text-muted">
             <span className="flex items-center gap-1.5">
-              <span aria-hidden className="trama h-3 w-5 rounded bg-subtle" /> montaje / esterilizacion
+              <span aria-hidden className="trama h-3 w-5 rounded bg-subtle" /> montaje / esterilización
             </span>
             {ESTADOS_TURNO.map((e) => {
               const Icono = iconoTurno[e]
@@ -277,7 +277,7 @@ export function AgendaPage() {
                   <dd className="dato text-right font-medium">{turno.fichaId}</dd>
                 </div>
                 <div className="flex justify-between gap-2">
-                  <dt className="text-muted">Ciclo del sillon</dt>
+                  <dt className="text-muted">Ciclo del sillón</dt>
                   <dd className="dato text-right font-medium">
                     {theme.ciclo.montaje} + {turno.duracion} + {theme.ciclo.esterilizacion} min
                   </dd>
@@ -285,12 +285,12 @@ export function AgendaPage() {
               </dl>
               {turno.estado === "ausente" && (
                 <p className="rounded-xl bg-danger/10 p-2 text-[0.6875rem] leading-snug text-danger">
-                  No vino. El sillon quedo vacio {turno.duracion} minutos: esa hora no se recupera.
+                  No vino. El sillón quedó vacío {turno.duracion} minutos: esa hora no se recupera.
                 </p>
               )}
             </div>
           ) : (
-            <p className="py-10 text-center text-[0.6875rem] text-muted">Elegi un turno de la grilla.</p>
+            <p className="py-10 text-center text-[0.6875rem] text-muted">Elegí un turno de la grilla.</p>
           )}
         </div>
       </div>

@@ -52,11 +52,11 @@ export function ConfigPage() {
   const c = theme.colors
   return (
     <div className="space-y-4">
-      <h1 className="font-heading text-2xl font-bold tracking-tight">Configuracion</h1>
+      <h1 className="font-heading text-2xl font-bold tracking-tight">Configuración</h1>
 
       <div className="grid gap-3 lg:grid-cols-2">
         <div className="space-y-3">
-          <Seccion titulo="Clinica" abierta>
+          <Seccion titulo="Clínica" abierta>
             <Fila label="Marca" value={theme.brand.name} />
             <Fila label="Sillones" value="4" />
             <Fila label="Profesionales" value="3" />
@@ -64,47 +64,47 @@ export function ConfigPage() {
           </Seccion>
 
           <Seccion
-            titulo="Dominio: ciclo del sillon"
-            nota="El bloque de la agenda dibuja estas dos bandas alrededor de la atencion. Subi la esterilizacion y toda la grilla se aprieta."
+            titulo="Dominio: ciclo del sillón"
+            nota="El bloque de la agenda dibuja estas dos bandas alrededor de la atención. Subí la esterilización y toda la grilla se aprieta."
           >
             <Fila label="Montaje" value={`${theme.ciclo.montaje} min`} />
-            <Fila label="Esterilizacion" value={`${theme.ciclo.esterilizacion} min`} />
-            <Fila label="Meta de ocupacion" value={`${Math.round(theme.ocupacion.meta * 100)}%`} />
+            <Fila label="Esterilización" value={`${theme.ciclo.esterilizacion} min`} />
+            <Fila label="Meta de ocupación" value={`${Math.round(theme.ocupacion.meta * 100)}%`} />
             <Fila label="Alarma de ausentismo" value={`${Math.round(theme.noShow.alerta * 100)}%`} />
           </Seccion>
 
           <Seccion titulo="Dominio: recall y planes">
-            <Fila label="Paciente a llamar desde" value={`${theme.recall.alerta} dias`} />
-            <Fila label="Paciente perdido desde" value={`${theme.recall.vencido} dias`} />
-            <Fila label="Plan abandonado desde" value={`${theme.plan.abandonado} dias sin sesion`} />
+            <Fila label="Paciente a llamar desde" value={`${theme.recall.alerta} días`} />
+            <Fila label="Paciente perdido desde" value={`${theme.recall.vencido} días`} />
+            <Fila label="Plan abandonado desde" value={`${theme.plan.abandonado} días sin sesión`} />
           </Seccion>
         </div>
 
         <div className="space-y-3">
           <Seccion titulo="Forma" abierta>
             <Fila label="Modo" value={theme.mode} />
-            <Fila label="Navegacion" value={theme.nav} />
-            <Fila label="Elevacion" value={theme.elevation} />
+            <Fila label="Navegación" value={theme.nav} />
+            <Fila label="Elevación" value={theme.elevation} />
             <Fila label="Bordes" value={theme.radius} />
             <Fila label="Densidad" value={theme.density} />
             <Fila label="Chips" value={theme.badge} />
-            <Fila label="Titulos" value={theme.font.heading} />
+            <Fila label="Títulos" value={theme.font.heading} />
             <Fila label="Cuerpo" value={theme.font.body} />
           </Seccion>
 
           <Seccion
             titulo="Paleta"
-            nota="El teal es el color de la marca y NUNCA se usa como estado de pieza: se confundiria con el verde de 'sana'."
+            nota="El teal es el color de la marca y NUNCA se usa como estado de pieza: se confundiría con el verde de 'sana'."
           >
             <Fila label="Teal menta (primario)" value={c.primary} swatch />
             <Fila label="Coral (acento, endodoncia)" value={c.accent} swatch />
-            <Fila label="Atendido / al dia" value={c.success} swatch />
+            <Fila label="Atendido / al día" value={c.success} swatch />
             <Fila label="Corona / a llamar" value={c.warning} swatch />
             <Fila label="Caries / ausente al turno" value={c.danger} swatch />
             <Fila label="Obturada / confirmado" value={c.info} swatch />
           </Seccion>
 
-          <Seccion titulo="Estados de la pieza" nota="Siete estados contra cuatro semanticos: 'a extraer' se distingue de 'caries' por la cruz, no por el color.">
+          <Seccion titulo="Estados de la pieza" nota="Siete estados contra cuatro semánticos: 'a extraer' se distingue de 'caries' por la cruz, no por el color.">
             <ul className="grid grid-cols-2 gap-1.5 pt-1">
               {ESTADOS.map((e) => (
                 <li key={e} className="flex items-center gap-2 text-[0.6875rem]">
@@ -118,7 +118,7 @@ export function ConfigPage() {
           <Seccion titulo="Integraciones">
             <Fila label="Obras sociales" value="mock (sin backend)" />
             <Fila label="WhatsApp" value="mock (sin backend)" />
-            <Fila label="Facturacion" value="mock (sin backend)" />
+            <Fila label="Facturación" value="mock (sin backend)" />
             <p className="pt-2 text-[0.6875rem] leading-snug text-muted">
               Demo frontend con datos de ejemplo. Sin backend conectado. Todo el diseño sale de shell/theme.ts.
             </p>

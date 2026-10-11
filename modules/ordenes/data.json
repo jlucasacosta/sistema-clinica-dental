@@ -13,7 +13,7 @@
       "ultimaVisita": "10/04/2026",
       "diasSinSesion": 90,
       "plan": {
-        "nombre": "Rehabilitacion cuadrante inferior",
+        "nombre": "Rehabilitación cuadrante inferior",
         "sesionesHechas": 2,
         "sesionesTotales": 5
       },
@@ -37,7 +37,7 @@
         },
         {
           "fecha": "02/07/2024",
-          "nota": "Se obtura la 26. La 36 avanzo a mesial. Molar 46 con caries profunda.",
+          "nota": "Se obtura la 26. La 36 avanzó a mesial. Molar 46 con caries profunda.",
           "profesional": "Dra. Ferrante",
           "lesiones": [
             {
@@ -59,7 +59,7 @@
         },
         {
           "fecha": "19/11/2024",
-          "nota": "Endodoncia de la 46: la caries llego a la pulpa. Se obtura la 36.",
+          "nota": "Endodoncia de la 46: la caries llegó a la pulpa. Se obtura la 36.",
           "profesional": "Dr. Ivancich",
           "lesiones": [
             {
@@ -81,7 +81,7 @@
         },
         {
           "fecha": "08/04/2025",
-          "nota": "Corona sobre la 46. Cordal 38 impactada: se indica extraccion.",
+          "nota": "Corona sobre la 46. Cordal 38 impactada: se indica extracción.",
           "profesional": "Dr. Ivancich",
           "lesiones": [
             {
@@ -103,7 +103,7 @@
         },
         {
           "fecha": "10/04/2026",
-          "nota": "Se extrae la 38. La 17 sigue sin tratar: el plan quedo a mitad de camino.",
+          "nota": "Se extrae la 38. La 17 sigue sin tratar: el plan quedó a mitad de camino.",
           "profesional": "Dra. Ferrante",
           "lesiones": [
             {
@@ -124,10 +124,10 @@
       "id": "F-1043",
       "paciente": "Joaquin Bentancor",
       "edad": 41,
-      "obraSocial": "Circulo Salud",
+      "obraSocial": "Círculo Salud",
       "estadoOS": "aprobada",
       "alertas": [
-        "Hipertension"
+        "Hipertensión"
       ],
       "ultimaVisita": "02/07/2026",
       "diasSinSesion": 7,
@@ -197,7 +197,7 @@
       "visitas": [
         {
           "fecha": "05/01/2026",
-          "nota": "Profilaxis. Sin patologia.",
+          "nota": "Profilaxis. Sin patología.",
           "profesional": "Dra. Ferrante",
           "lesiones": []
         },
@@ -228,7 +228,7 @@
       "ultimaVisita": "18/06/2026",
       "diasSinSesion": 21,
       "plan": {
-        "nombre": "Extracciones y protesis parcial",
+        "nombre": "Extracciones y prótesis parcial",
         "sesionesHechas": 2,
         "sesionesTotales": 6
       },
@@ -283,13 +283,13 @@
       "id": "F-1046",
       "paciente": "Abril Nardelli",
       "edad": 19,
-      "obraSocial": "Prevencion Sur",
+      "obraSocial": "Prevención Sur",
       "estadoOS": "aprobada",
       "alertas": [],
       "ultimaVisita": "28/06/2026",
       "diasSinSesion": 11,
       "plan": {
-        "nombre": "Extraccion de cordales",
+        "nombre": "Extracción de cordales",
         "sesionesHechas": 1,
         "sesionesTotales": 2
       },
@@ -329,7 +329,7 @@
       "id": "F-1047",
       "paciente": "Ramiro Cuestas",
       "edad": 46,
-      "obraSocial": "Circulo Salud",
+      "obraSocial": "Círculo Salud",
       "estadoOS": "aprobada",
       "alertas": [
         "Bruxismo"
@@ -337,7 +337,7 @@
       "ultimaVisita": "01/07/2026",
       "diasSinSesion": 8,
       "plan": {
-        "nombre": "Ferula de descarga + obturaciones",
+        "nombre": "Férula de descarga + obturaciones",
         "sesionesHechas": 2,
         "sesionesTotales": 3
       },
@@ -361,7 +361,7 @@
         },
         {
           "fecha": "01/07/2026",
-          "nota": "Se obturan 16 y 26. Se entrega ferula.",
+          "nota": "Se obturan 16 y 26. Se entrega férula.",
           "profesional": "Dra. Ferrante",
           "lesiones": [
             {
@@ -395,7 +395,7 @@
       "visitas": [
         {
           "fecha": "20/09/2025",
-          "nota": "Se abre camara pulpar de la 36. El paciente no volvio.",
+          "nota": "Se abre cámara pulpar de la 36. El paciente no volvió.",
           "profesional": "Dr. Ivancich",
           "lesiones": [
             {
@@ -416,7 +416,7 @@
       "id": "F-1049",
       "paciente": "Malena Riquelme",
       "edad": 23,
-      "obraSocial": "Prevencion Sur",
+      "obraSocial": "Prevención Sur",
       "estadoOS": "aprobada",
       "alertas": [],
       "ultimaVisita": "07/07/2026",
@@ -429,7 +429,7 @@
       "visitas": [
         {
           "fecha": "07/07/2026",
-          "nota": "Primera sesion de blanqueamiento. Sin patologia.",
+          "nota": "Primera sesión de blanqueamiento. Sin patología.",
           "profesional": "Dra. Ferrante",
           "lesiones": []
         }

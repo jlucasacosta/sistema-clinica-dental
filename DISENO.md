@@ -44,7 +44,7 @@ El abogado exigió que el primary **lea verde-menta y no cyan**, para no ecoar e
 | Módulo | Arquetipo | Qué es |
 |---|---|---|
 | **ordenes** (fichas) ⭐ | `odontograma-interactivo` (NUEVO) | mapa anatómico FDI de 32 piezas en 4 cuadrantes. Cada pieza es un SVG de **5 caras clickeables por separado** (oclusal, vestibular, lingual, mesial, distal). Click en una cara cicla su estado. **No es una grilla de 32 celdas: es un diagrama espacial** |
-| **agenda** | `agenda-sillon-ciclo` (NUEVO) | un solo día, columnas = sillones físicos, eje Y de **tiempo continuo** (no slots fijos). Cada turno es un bloque **tri-banda**: montaje (rayado) / atención (sólido) / esterilización (rayado). Codifica el **ciclo del sillon**, no "ocupado". Un riel de color por dentista ata sus bloques entre columnas |
+| **agenda** | `agenda-sillon-ciclo` (NUEVO) | un solo día, columnas = sillones físicos, eje Y de **tiempo continuo** (no slots fijos). Cada turno es un bloque **tri-banda**: montaje (rayado) / atención (sólido) / esterilización (rayado). Codifica el **ciclo del sillón**, no "ocupado". Un riel de color por dentista ata sus bloques entre columnas |
 | **dashboard** | `tablero-jornada` (NUEVO) | riel de próximos turnos + `barra-estado-jornada` + `donut` de producción + alertas de recall |
 | **conversaciones** | `master-detail` | hilos + panel |
 | **contactos** | `tabla-densa` | padrón de pacientes con obra social y última visita |
@@ -111,9 +111,9 @@ Test de un segundo: **la silueta anatómica del diente con las caras pintadas**.
 
 ---
 
-## Ajustes de accesibilidad posteriores a la ficha (auditoria 2026-10-10)
+## Ajustes de accesibilidad posteriores a la ficha (auditoría 2026-10-10)
 
-La ficha queda cerrada: no cambian las palancas, la tipografia ni los arquetipos. Solo se tocaron valores de token para que el texto llegue a 4.5:1 (detalle en `auditorias/sistema-clinica-dental.md`, F-02 y F-07):
+La ficha queda cerrada: no cambian las palancas, la tipografía ni los arquetipos. Solo se tocaron valores de token para que el texto llegue a 4.5:1 (detalle en `auditorias/sistema-clinica-dental.md`, F-02 y F-07):
 
 - `primary` `#0e7c66` -> `#0f6b59`, `success` `#15803d` -> `#156d38`, `warning` `#b45309` -> `#944a0e`, `danger` `#c81e1e` -> `#b41f1f`, `info` `#2563eb` -> `#2257c5`. Mismo hue, oscurecidos el minimo hacia `fg`. El teal sigue leyendo verde-menta (hue 168).
 - `accent` (coral) no cambia. Se agrega un derivado `accent-ink` (acento mezclado 45 % con `fg`) para usarlo como texto, porque el coral solo llega a 3.0:1 sobre blanco.

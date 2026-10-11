@@ -118,7 +118,7 @@ create extension if not exists btree_gist with schema extensions;
 -- agenda: sillones y profesionales (data.json de agenda: sillones, dentistas)
 create table public.sillones (
   id     text primary key,          -- 'S1'
-  nombre text not null              -- 'Sillon 1'
+  nombre text not null              -- 'Sillón 1'
 );
 
 create table public.profesionales (
@@ -250,7 +250,7 @@ create table public.tratamientos (
   fecha     date not null default current_date,
   ficha_id  text references public.fichas (id),
   categoria text not null
-            check (categoria in ('Profilaxis', 'Obturaciones', 'Endodoncias', 'Coronas y protesis', 'Extracciones'))
+            check (categoria in ('Profilaxis', 'Obturaciones', 'Endodoncias', 'Coronas y prótesis', 'Extracciones'))
 );
 
 -- dashboard: lista de recall ("a quien hay que llamar") y su motivo
@@ -1118,14 +1118,14 @@ export async function POST(request: Request) {
 
   const conversacion = (mensajes ?? [])
     .reverse()
-    .map((m) => `${m.de === "paciente" ? "Paciente" : "Clinica"}: ${m.texto}`)
+    .map((m) => `${m.de === "paciente" ? "Paciente" : "Clínica"}: ${m.texto}`)
     .join("\n")
 
   const respuesta = await client.responses.create({
     model: process.env.OPENAI_MODEL!,
     instructions:
-      "Sos recepcionista de una clinica dental. Redacta una respuesta corta, amable y en voseo. " +
-      "No des diagnosticos ni indicaciones clinicas. Si hace falta, ofrece que la llame el profesional.",
+      "Sos recepcionista de una clínica dental. Redactá una respuesta corta, amable y en voseo. " +
+      "No des diagnósticos ni indicaciones clínicas. Si hace falta, ofrecé que la llame el profesional.",
     input: conversacion,
     max_output_tokens: 300, // tope de costo por llamada
   })
@@ -1149,7 +1149,7 @@ const respuesta = await ai.models.generateContent({
   model: process.env.GEMINI_MODEL!,
   contents: conversacion,
   config: {
-    systemInstruction: "Sos recepcionista de una clinica dental. Respuesta corta, amable, en voseo. Sin diagnosticos.",
+    systemInstruction: "Sos recepcionista de una clínica dental. Respuesta corta, amable, en voseo. Sin diagnósticos.",
     maxOutputTokens: 300,
   },
 })

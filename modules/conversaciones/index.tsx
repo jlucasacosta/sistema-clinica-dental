@@ -93,13 +93,13 @@ export function ConversacionesPage() {
                 <input
                   disabled
                   aria-label="Escribir un mensaje (deshabilitado en el demo)"
-                  placeholder="Demo frontend: el envio no esta conectado"
+                  placeholder="Demo frontend: el envío no está conectado"
                   className="target w-full rounded-xl border border-border bg-subtle px-3 py-2 text-xs text-muted"
                 />
               </div>
             </>
           ) : (
-            <p className="py-20 text-center text-xs text-muted">Elegi un hilo.</p>
+            <p className="py-20 text-center text-xs text-muted">Elegí un hilo.</p>
           )}
         </div>
       </div>

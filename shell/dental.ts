@@ -186,6 +186,14 @@ export const chipOS: Record<EstadoOS, string> = {
   rechazada: "bg-danger/15 text-danger",
   particular: "bg-subtle text-muted",
 }
+// Rotulo de display. El VALOR del enum no se toca (lo compara el codigo y lo valida un CHECK
+// de SQL): solo el texto que ve el usuario lleva tilde.
+export const rotuloOS: Record<EstadoOS, string> = {
+  aprobada: "aprobada",
+  "en tramite": "en trámite",
+  rechazada: "rechazada",
+  particular: "particular",
+}
 
 // --- El plan de tratamiento se da por abandonado si pasaron demasiados dias sin sesion ---
 export function planAbandonado(diasSinSesion: number, progreso: number): boolean {

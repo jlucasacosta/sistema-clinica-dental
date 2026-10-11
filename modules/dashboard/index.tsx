@@ -59,7 +59,7 @@ function Ocupaciones({ datos }: { datos: Ocupacion[] }) {
         )
       })}
       <li className="pt-1 text-[0.6875rem] text-muted">
-        Meta de ocupacion: {Math.round(theme.ocupacion.meta * 100)}% del sillon.
+        Meta de ocupación: {Math.round(theme.ocupacion.meta * 100)}% del sillón.
       </li>
     </ul>
   )
@@ -85,7 +85,7 @@ export function DashboardPage() {
       <h1 className="font-heading text-2xl font-bold tracking-tight">Panel general</h1>
 
       <div className="surface-card p-4">
-        <h2 className="mb-2 font-heading text-sm font-bold">Proximos turnos</h2>
+        <h2 className="mb-2 font-heading text-sm font-bold">Próximos turnos</h2>
         {proximos.length ? <RielProximos proximos={proximos} /> : <div className="h-24 animate-pulse rounded-xl bg-subtle" />}
       </div>
 
@@ -95,12 +95,12 @@ export function DashboardPage() {
         </div>
 
         <div className="surface-card p-4">
-          <h2 className="mb-3 font-heading text-sm font-bold">Ocupacion del sillon</h2>
+          <h2 className="mb-3 font-heading text-sm font-bold">Ocupación del sillón</h2>
           {ocupacion.length ? <Ocupaciones datos={ocupacion} /> : <div className="h-28 animate-pulse rounded-xl bg-subtle" />}
         </div>
 
         <div className="surface-card p-4">
-          <h2 className="mb-3 font-heading text-sm font-bold">Produccion del mes</h2>
+          <h2 className="mb-3 font-heading text-sm font-bold">Producción del mes</h2>
           {produccion.length ? (
             <Donut porciones={produccion} unidad="tratamientos" />
           ) : (
@@ -113,7 +113,7 @@ export function DashboardPage() {
         <div className="mb-3 flex items-baseline justify-between">
           <h2 className="font-heading text-sm font-bold">Seguimiento de pacientes</h2>
           <p className="text-[0.6875rem] text-muted">
-            recall a los {theme.recall.alerta} dias · perdido a los {theme.recall.vencido}
+            recall a los {theme.recall.alerta} días · perdido a los {theme.recall.vencido}
           </p>
         </div>
         <ul className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">

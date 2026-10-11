@@ -27,7 +27,7 @@
     },
     {
       "id": "4",
-      "label": "Coronas y protesis",
+      "label": "Coronas y prótesis",
       "valor": 9,
       "tono": "warning"
     },
@@ -43,16 +43,16 @@
       "id": "1",
       "hora": "11:10",
       "paciente": "Ramiro Cuestas",
-      "tratamiento": "Obturacion 16",
-      "sillon": "Sillon 1",
+      "tratamiento": "Obturación 16",
+      "sillon": "Sillón 1",
       "minutosPara": 5
     },
     {
       "id": "2",
       "hora": "11:50",
       "paciente": "Abril Nardelli",
-      "tratamiento": "Extraccion cordal 28",
-      "sillon": "Sillon 2",
+      "tratamiento": "Extracción cordal 28",
+      "sillon": "Sillón 2",
       "minutosPara": 45
     },
     {
@@ -60,15 +60,15 @@
       "hora": "12:00",
       "paciente": "Carla Vanzetti",
       "tratamiento": "Corona provisoria",
-      "sillon": "Sillon 4",
+      "sillon": "Sillón 4",
       "minutosPara": 55
     },
     {
       "id": "4",
       "hora": "13:00",
       "paciente": "Diego Aramburu",
-      "tratamiento": "Ferula de descarga",
-      "sillon": "Sillon 3",
+      "tratamiento": "Férula de descarga",
+      "sillon": "Sillón 3",
       "minutosPara": 115
     },
     {
@@ -76,15 +76,15 @@
       "hora": "13:30",
       "paciente": "Camila Duarte",
       "tratamiento": "Control de ortodoncia",
-      "sillon": "Sillon 1",
+      "sillon": "Sillón 1",
       "minutosPara": 145
     },
     {
       "id": "6",
       "hora": "14:20",
       "paciente": "Ignacio Zabaleta",
-      "tratamiento": "Endodoncia 36, sesion 2",
-      "sillon": "Sillon 2",
+      "tratamiento": "Endodoncia 36, sesión 2",
+      "sillon": "Sillón 2",
       "minutosPara": 195
     }
   ],
@@ -99,7 +99,7 @@
     {
       "id": "2",
       "paciente": "Martina Sobrero",
-      "motivo": "Obturacion 17 pendiente",
+      "motivo": "Obturación 17 pendiente",
       "dias": 90,
       "telefono": "+54 9 11 4783-2610"
     },
@@ -120,7 +120,7 @@
     {
       "id": "5",
       "paciente": "Matias Ferreyra",
-      "motivo": "Protesis sin retirar",
+      "motivo": "Prótesis sin retirar",
       "dias": 401,
       "telefono": "+54 9 261 634-8815"
     },
@@ -134,22 +134,22 @@
   ],
   "ocupacion": [
     {
-      "sillon": "Sillon 1",
+      "sillon": "Sillón 1",
       "ocupado": 300,
       "disponible": 660
     },
     {
-      "sillon": "Sillon 2",
+      "sillon": "Sillón 2",
       "ocupado": 510,
       "disponible": 660
     },
     {
-      "sillon": "Sillon 3",
+      "sillon": "Sillón 3",
       "ocupado": 240,
       "disponible": 660
     },
     {
-      "sillon": "Sillon 4",
+      "sillon": "Sillón 4",
       "ocupado": 170,
       "disponible": 660
     }

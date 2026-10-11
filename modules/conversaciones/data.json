@@ -5,26 +5,26 @@
       "paciente": "Martina Sobrero",
       "motivo": "Obra social rechazada",
       "canal": "whatsapp",
-      "ultimo": "¿Entonces cuanto me sale particular?",
+      "ultimo": "¿Entonces cuánto me sale particular?",
       "hora": "10:14",
       "sinLeer": 2,
       "mensajes": [
         {
           "id": "m1",
           "de": "clinica",
-          "texto": "Hola Martina. Mutual Aurora rechazo la autorizacion de la obturacion.",
+          "texto": "Hola Martina. Mutual Aurora rechazó la autorización de la obturación.",
           "hora": "09:31"
         },
         {
           "id": "m2",
           "de": "paciente",
-          "texto": "¿Como que la rechazo? Si pague el coseguro el mes pasado.",
+          "texto": "¿Cómo que la rechazó? Si pagué el coseguro el mes pasado.",
           "hora": "09:48"
         },
         {
           "id": "m3",
           "de": "clinica",
-          "texto": "El rechazo es por la cobertura del tratamiento, no por el coseguro. Podemos reclamarlo, tarda unos 15 dias.",
+          "texto": "El rechazo es por la cobertura del tratamiento, no por el coseguro. Podemos reclamarlo, tarda unos 15 días.",
           "hora": "10:02"
         },
         {
@@ -36,7 +36,7 @@
         {
           "id": "m5",
           "de": "paciente",
-          "texto": "¿Entonces cuanto me sale particular?",
+          "texto": "¿Entonces cuánto me sale particular?",
           "hora": "10:14"
         },
         {
@@ -59,7 +59,7 @@
         {
           "id": "m1",
           "de": "clinica",
-          "texto": "Lautaro, quedo abierta la camara pulpar de la 36. Es importante que vuelvas.",
+          "texto": "Lautaro, quedó abierta la cámara pulpar de la 36. Es importante que vuelvas.",
           "hora": "hace 4 m"
         }
       ]
@@ -67,7 +67,7 @@
     {
       "id": "H-03",
       "paciente": "Abril Nardelli",
-      "motivo": "Extraccion cordal",
+      "motivo": "Extracción cordal",
       "canal": "whatsapp",
       "ultimo": "Confirmo el turno de las 11:50",
       "hora": "08:40",
@@ -76,7 +76,7 @@
         {
           "id": "m1",
           "de": "clinica",
-          "texto": "Abril, recorda venir con alguien que te acompañe.",
+          "texto": "Abril, recordá venir con alguien que te acompañe.",
           "hora": "08:22"
         },
         {
@@ -90,16 +90,16 @@
     {
       "id": "H-04",
       "paciente": "Ramiro Cuestas",
-      "motivo": "Ferula de descarga",
+      "motivo": "Férula de descarga",
       "canal": "email",
-      "ultimo": "¿La ferula se usa toda la noche?",
+      "ultimo": "¿La férula se usa toda la noche?",
       "hora": "09:05",
       "sinLeer": 1,
       "mensajes": [
         {
           "id": "m1",
           "de": "paciente",
-          "texto": "¿La ferula se usa toda la noche?",
+          "texto": "¿La férula se usa toda la noche?",
           "hora": "09:05"
         }
       ]
@@ -107,7 +107,7 @@
     {
       "id": "H-05",
       "paciente": "Ezequiel Pombo",
-      "motivo": "Autorizacion en tramite",
+      "motivo": "Autorización en trámite",
       "canal": "web",
       "ultimo": "Seguimos esperando la respuesta",
       "hora": "ayer",
@@ -116,7 +116,7 @@
         {
           "id": "m1",
           "de": "paciente",
-          "texto": "¿Salio la autorizacion de la protesis?",
+          "texto": "¿Salió la autorización de la prótesis?",
           "hora": "ayer"
         },
         {
@@ -132,14 +132,14 @@
       "paciente": "Delfina Grispo",
       "motivo": "Profilaxis",
       "canal": "whatsapp",
-      "ultimo": "Gracias! Nos vemos en 6 meses",
+      "ultimo": "¡Gracias! Nos vemos en 6 meses",
       "hora": "ayer",
       "sinLeer": 0,
       "mensajes": [
         {
           "id": "m1",
           "de": "paciente",
-          "texto": "Gracias! Nos vemos en 6 meses",
+          "texto": "¡Gracias! Nos vemos en 6 meses",
           "hora": "ayer"
         }
       ]
@@ -147,7 +147,7 @@
     {
       "id": "H-07",
       "paciente": "Ignacio Zabaleta",
-      "motivo": "Endodoncia sesion 2",
+      "motivo": "Endodoncia sesión 2",
       "canal": "whatsapp",
       "ultimo": "¿Puedo comer antes del turno?",
       "hora": "09:58",
@@ -190,7 +190,7 @@
         {
           "id": "m1",
           "de": "clinica",
-          "texto": "Pilar, paso el tiempo del control. ¿Te agendamos?",
+          "texto": "Pilar, pasó el tiempo del control. ¿Te agendamos?",
           "hora": "hace 8 d"
         }
       ]
@@ -200,14 +200,14 @@
       "paciente": "Carla Vanzetti",
       "motivo": "Corona provisoria",
       "canal": "whatsapp",
-      "ultimo": "Se me movio un poco la corona",
+      "ultimo": "Se me movió un poco la corona",
       "hora": "10:31",
       "sinLeer": 1,
       "mensajes": [
         {
           "id": "m1",
           "de": "paciente",
-          "texto": "Se me movio un poco la corona",
+          "texto": "Se me movió un poco la corona",
           "hora": "10:31"
         }
       ]
@@ -249,7 +249,7 @@
     {
       "id": "H-13",
       "paciente": "Matias Ferreyra",
-      "motivo": "Protesis sin retirar",
+      "motivo": "Prótesis sin retirar",
       "canal": "email",
       "ultimo": "—",
       "hora": "hace 1 a",
@@ -258,7 +258,7 @@
         {
           "id": "m1",
           "de": "clinica",
-          "texto": "Matias, la protesis esta lista desde el año pasado.",
+          "texto": "Matias, la prótesis está lista desde el año pasado.",
           "hora": "hace 1 a"
         }
       ]
