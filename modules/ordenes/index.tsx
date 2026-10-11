@@ -57,7 +57,7 @@ function BarraPlan({ ficha }: { ficha: Ficha }) {
 export function OrdenesPage() {
   const [fichas, setFichas] = useState<Ficha[]>([])
   const [selId, setSelId] = useState<string | null>(null)
-  const [visita, setVisita] = useState(0)
+  const [visitaSel, setVisita] = useState(0)
   const [modo, setModo] = useState<"editar" | "timelapse">("timelapse")
   const [edicion, setEdicion] = useState<Pieza[] | null>(null)
   const [heroe, setHeroe] = useState<number>(46)
@@ -73,6 +73,9 @@ export function OrdenesPage() {
   }, [])
 
   const ficha = fichas.find((f) => f.id === selId)
+  // Al elegir otro paciente, el primer render todavia trae el indice del anterior: se acota a las visitas de esta ficha
+  // (si no, ficha.visitas[visita] da undefined y la pantalla queda en blanco antes de que el efecto lo reinicie).
+  const visita = ficha ? Math.min(visitaSel, ficha.visitas.length - 1) : 0
 
   // Al cambiar de paciente, el scrubber salta a la ultima visita y se limpia la edicion.
   useEffect(() => {
