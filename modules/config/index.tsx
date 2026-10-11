@@ -11,8 +11,8 @@ import { MuestraEstado } from "@/shell/odontograma"
 function Fila({ label, value, swatch }: { label: string; value: string; swatch?: boolean }) {
   return (
     <div className="flex items-center justify-between border-b border-border py-2 last:border-0">
-      <span className="text-[0.6875rem] text-muted">{label}</span>
-      <span className="dato flex items-center gap-2 text-[0.6875rem] font-medium">
+      <span className="text-xs text-muted">{label}</span>
+      <span className="dato flex items-center gap-2 text-xs font-medium">
         {swatch && <span aria-hidden className="h-4 w-4 rounded border border-border" style={{ background: value }} />}
         {value}
       </span>
@@ -40,7 +40,7 @@ function Seccion({ titulo, children, abierta, nota }: { titulo: string; children
       </h2>
       {open && (
         <div id={panel} className="border-t border-border px-4 py-3">
-          {nota && <p className="mb-2 text-[0.6875rem] leading-snug text-muted">{nota}</p>}
+          {nota && <p className="mb-2 text-xs leading-snug text-muted">{nota}</p>}
           {children}
         </div>
       )}
@@ -107,7 +107,7 @@ export function ConfigPage() {
           <Seccion titulo="Estados de la pieza" nota="Siete estados contra cuatro semánticos: 'a extraer' se distingue de 'caries' por la cruz, no por el color.">
             <ul className="grid grid-cols-2 gap-1.5 pt-1">
               {ESTADOS.map((e) => (
-                <li key={e} className="flex items-center gap-2 text-[0.6875rem]">
+                <li key={e} className="flex items-center gap-2 text-xs">
                   <MuestraEstado estado={e} />
                   <span className="text-muted">{e}</span>
                 </li>
@@ -119,7 +119,7 @@ export function ConfigPage() {
             <Fila label="Obras sociales" value="mock (sin backend)" />
             <Fila label="WhatsApp" value="mock (sin backend)" />
             <Fila label="Facturación" value="mock (sin backend)" />
-            <p className="pt-2 text-[0.6875rem] leading-snug text-muted">
+            <p className="pt-2 text-xs leading-snug text-muted">
               Demo frontend con datos de ejemplo. Sin backend conectado. Todo el diseño sale de shell/theme.ts.
             </p>
           </Seccion>

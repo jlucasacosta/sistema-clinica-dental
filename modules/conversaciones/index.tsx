@@ -1,20 +1,16 @@
 "use client"
-import { useEffect, useState } from "react"
-import { getHilos, type Hilo } from "./api"
+import { useState } from "react"
+import { getHilos } from "./api"
+import { Esqueleto, ErrorCarga, useCarga } from "@/shell/carga"
 
 // master-detail: hilos a la izquierda, conversacion a la derecha. Arquetipo de soporte.
 // Cada hilo esta atado a un motivo clinico: nadie escribe "hola" y ya.
 
 export function ConversacionesPage() {
-  const [hilos, setHilos] = useState<Hilo[]>([])
-  const [sel, setSel] = useState<string | null>(null)
-
-  useEffect(() => {
-    getHilos().then((hs) => {
-      setHilos(hs)
-      setSel(hs[0]?.id ?? null)
-    })
-  }, [])
+  const { data, error, cargando, reintentar } = useCarga(getHilos)
+  const hilos = data ?? []
+  const [elegido, setSel] = useState<string | null>(null)
+  const sel = elegido ?? hilos[0]?.id ?? null
 
   const hilo = hilos.find((h) => h.id === sel)
   const sinLeer = hilos.reduce((s, h) => s + h.sinLeer, 0)
@@ -23,11 +19,20 @@ export function ConversacionesPage() {
     <div className="space-y-4">
       <div>
         <h1 className="font-heading text-2xl font-bold tracking-tight">Mensajes</h1>
-        <p className="text-[0.6875rem] text-muted">
-          {hilos.length} hilos · <span className="text-accent-ink">{sinLeer} sin leer</span>
+        <p className="text-xs text-muted">
+          {cargando ? "—" : hilos.length} hilos · <span className="text-accent-ink">{cargando ? "—" : sinLeer} sin leer</span>
         </p>
       </div>
 
+      {error && <ErrorCarga onReintentar={reintentar} />}
+      {cargando && (
+        <div aria-busy="true" className="grid gap-4 lg:grid-cols-[21rem_1fr]">
+          <Esqueleto className="h-72" />
+          <Esqueleto className="hidden h-72 lg:block" />
+        </div>
+      )}
+
+      {!cargando && !error && (
       <div className="grid gap-4 lg:grid-cols-[21rem_1fr]">
         <ul aria-label="Hilos de mensajes" className="surface-card max-h-[34rem] overflow-y-auto p-2">
           {hilos.map((h) => {
@@ -45,13 +50,13 @@ export function ConversacionesPage() {
                 >
                   <div className="flex items-baseline justify-between gap-2">
                     <p className="truncate text-xs font-semibold">{h.paciente}</p>
-                    <span className="dato shrink-0 text-[0.6875rem] text-muted">{h.hora}</span>
+                    <span className="dato shrink-0 text-xs text-muted">{h.hora}</span>
                   </div>
-                  <p className="truncate text-[0.6875rem] font-medium text-primary">{h.motivo}</p>
+                  <p className="truncate text-xs font-medium text-primary">{h.motivo}</p>
                   <div className="mt-0.5 flex items-center justify-between gap-2">
-                    <p className="truncate text-[0.6875rem] text-muted">{h.ultimo}</p>
+                    <p className="truncate text-xs text-muted">{h.ultimo}</p>
                     {h.sinLeer > 0 && (
-                      <span className="flex h-4 min-w-4 shrink-0 items-center justify-center rounded-full bg-accent px-1 text-[0.6875rem] font-bold text-fg">
+                      <span className="flex h-4 min-w-4 shrink-0 items-center justify-center rounded-full bg-accent px-1 text-xs font-bold text-fg">
                         {h.sinLeer}<span className="sr-only"> sin leer</span>
                       </span>
                     )}
@@ -67,7 +72,7 @@ export function ConversacionesPage() {
             <>
               <div className="border-b border-border px-4 py-3">
                 <p className="font-heading text-sm font-bold">{hilo.paciente}</p>
-                <p className="text-[0.6875rem] text-muted">
+                <p className="text-xs text-muted">
                   {hilo.motivo} · <span className="chip bg-subtle text-muted">{hilo.canal}</span>
                 </p>
               </div>
@@ -80,11 +85,11 @@ export function ConversacionesPage() {
                         (m.de === "clinica" ? "bg-primary/15 text-fg" : "bg-subtle text-fg")
                       }
                     >
-                      <p className="text-[0.6875rem] leading-snug">
+                      <p className="text-xs leading-snug">
                         <span className="sr-only">{m.de === "clinica" ? "Clínica: " : "Paciente: "}</span>
                         {m.texto}
                       </p>
-                      <p className="dato mt-0.5 text-right text-[0.6875rem] text-muted">{m.hora}</p>
+                      <p className="dato mt-0.5 text-right text-xs text-muted">{m.hora}</p>
                     </div>
                   </div>
                 ))}
@@ -103,6 +108,7 @@ export function ConversacionesPage() {
           )}
         </div>
       </div>
+      )}
     </div>
   )
 }

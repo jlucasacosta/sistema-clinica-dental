@@ -14,7 +14,7 @@
     },
     {
       "id": "P-02",
-      "nombre": "Joaquin Bentancor",
+      "nombre": "Joaquín Bentancor",
       "edad": 41,
       "email": "jbentancor@outlook.com",
       "telefono": "+54 9 341 273-6605",
@@ -110,7 +110,7 @@
     },
     {
       "id": "P-10",
-      "nombre": "Tomas Escalante",
+      "nombre": "Tomás Escalante",
       "edad": 37,
       "email": "tomiescalante88@gmail.com",
       "telefono": "+54 9 351 662-4188",
@@ -146,7 +146,7 @@
     },
     {
       "id": "P-13",
-      "nombre": "Sofia Etchegaray",
+      "nombre": "Sofía Etchegaray",
       "edad": 26,
       "email": "s.etchegaray@hotmail.com",
       "telefono": "+54 9 261 512-8894",
@@ -158,7 +158,7 @@
     },
     {
       "id": "P-14",
-      "nombre": "Federico Olguin",
+      "nombre": "Federico Olguín",
       "edad": 39,
       "email": "fede_olguin@hotmail.com",
       "telefono": "+54 9 11 3319-7748",
@@ -206,7 +206,7 @@
     },
     {
       "id": "P-18",
-      "nombre": "Matias Ferreyra",
+      "nombre": "Matías Ferreyra",
       "edad": 55,
       "email": "mferreyra77@outlook.com",
       "telefono": "+54 9 261 634-8815",
@@ -218,7 +218,7 @@
     },
     {
       "id": "P-19",
-      "nombre": "Lucia Sanguinetti",
+      "nombre": "Lucía Sanguinetti",
       "edad": 24,
       "email": "luciasanguinetti@gmail.com",
       "telefono": "+54 9 341 402-5573",
@@ -230,7 +230,7 @@
     },
     {
       "id": "P-20",
-      "nombre": "Nicolas Baigorria",
+      "nombre": "Nicolás Baigorria",
       "edad": 36,
       "email": "nico.baigorria91@gmail.com",
       "telefono": "+54 9 11 2087-6614",
@@ -254,7 +254,7 @@
     },
     {
       "id": "P-22",
-      "nombre": "Gaston Uriburu",
+      "nombre": "Gastón Uriburu",
       "edad": 43,
       "email": "guriburu@hotmail.com",
       "telefono": "+54 9 351 204-7736",
@@ -278,7 +278,7 @@
     },
     {
       "id": "P-24",
-      "nombre": "Hernan Zubizarreta",
+      "nombre": "Hernán Zubizarreta",
       "edad": 50,
       "email": "hzubizarreta@outlook.com",
       "telefono": "+54 9 341 273-6605",
@@ -302,7 +302,7 @@
     },
     {
       "id": "P-26",
-      "nombre": "Sebastian Miranda",
+      "nombre": "Sebastián Miranda",
       "edad": 47,
       "email": "smiranda@yahoo.com",
       "telefono": "+54 9 11 6034-8917",
@@ -314,7 +314,7 @@
     },
     {
       "id": "P-27",
-      "nombre": "Micaela Bordon",
+      "nombre": "Micaela Bordón",
       "edad": 35,
       "email": "bordon.micaela@hotmail.com",
       "telefono": "+54 9 351 587-9930",

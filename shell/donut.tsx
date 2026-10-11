@@ -36,7 +36,7 @@ export function Donut({ porciones, unidad = "" }: { porciones: Porcion[]; unidad
         {/* el total vive en el centro, en HTML: dentro del SVG rotado saldria de costado */}
         <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
           <span className="font-heading text-2xl font-bold leading-none">{total}</span>
-          <span className="text-[0.6875rem] text-muted">{unidad}</span>
+          <span className="text-xs text-muted">{unidad}</span>
         </div>
       <svg viewBox="0 0 110 110" aria-hidden focusable={false} className="h-40 w-40 -rotate-90">
         <circle cx={55} cy={55} r={R} className="stroke-subtle" strokeWidth={13} fill="none" />
@@ -65,7 +65,7 @@ export function Donut({ porciones, unidad = "" }: { porciones: Porcion[]; unidad
 
       <ul className="min-w-0 flex-1 space-y-1.5">
         {porciones.map((p) => (
-          <li key={p.id} className="flex items-center gap-2 text-[0.6875rem]">
+          <li key={p.id} className="flex items-center gap-2 text-xs">
             <span aria-hidden className={"h-2.5 w-2.5 shrink-0 rounded-full " + punto[p.tono]} />
             <span className="truncate text-muted">{p.label}</span>
             <span className="dato ml-auto font-semibold">{p.valor}</span>

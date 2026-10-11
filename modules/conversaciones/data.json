@@ -163,7 +163,7 @@
     },
     {
       "id": "H-08",
-      "paciente": "Federico Olguin",
+      "paciente": "Federico Olguín",
       "motivo": "Turno cancelado",
       "canal": "whatsapp",
       "ultimo": "No voy a poder ir hoy",
@@ -214,7 +214,7 @@
     },
     {
       "id": "H-11",
-      "paciente": "Sofia Etchegaray",
+      "paciente": "Sofía Etchegaray",
       "motivo": "Endodoncia 46",
       "canal": "whatsapp",
       "ultimo": "Confirmado para las 16:30",
@@ -231,7 +231,7 @@
     },
     {
       "id": "H-12",
-      "paciente": "Nicolas Baigorria",
+      "paciente": "Nicolás Baigorria",
       "motivo": "Urgencia",
       "canal": "whatsapp",
       "ultimo": "No llego, se me hizo tarde",
@@ -248,7 +248,7 @@
     },
     {
       "id": "H-13",
-      "paciente": "Matias Ferreyra",
+      "paciente": "Matías Ferreyra",
       "motivo": "Prótesis sin retirar",
       "canal": "email",
       "ultimo": "—",
@@ -258,7 +258,7 @@
         {
           "id": "m1",
           "de": "clinica",
-          "texto": "Matias, la prótesis está lista desde el año pasado.",
+          "texto": "Matías, la prótesis está lista desde el año pasado.",
           "hora": "hace 1 a"
         }
       ]

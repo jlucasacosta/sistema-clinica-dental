@@ -7,3 +7,7 @@
 - El recall se deriva de `max(fecha)` por paciente; los umbrales (theme.recall) son
   diseño, no dato: viven en el cliente.
 - Reemplazar: modules/dashboard/api.ts (mock -> queries agregadas). Misma firma.
+- Las cinco consultas se piden juntas con `useCarga`: si una falla, el tablero muestra "Reintentar".
+  Mientras cargan se ve "—" y un esqueleto estático, nunca un 0.
+- Coherencia del demo: `jornada`, `proximos` y `ocupacion` de data.json están calculados a partir de los
+  turnos de modules/agenda/data.json a las 11:05. Si editás un turno, actualizalos.

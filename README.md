@@ -20,11 +20,13 @@ Aprendé a crear tu Agencia de IA y conseguir tu primer cliente. Eso lo trabajam
 ## Qué incluye
 - Fichas: el **odontograma interactivo** — las 32 piezas numeradas con el sistema FDI, cada una con sus 5 caras. Tocás una cara y cambia de estado (sana, caries, obturada, corona, endodoncia, ausente, a extraer)
 - **Historial del odontograma**: arrastrás el control del historial y ves la boca del paciente cambiar visita por visita. Una caries que se obtura, una pieza que se extrae
-- Agenda: un día, una columna por sillón, y cada turno ocupa el sillón durante **montaje + atención + esterilización**. El tiempo es continuo: un hueco de 20 minutos se ve como un hueco de 20 minutos
+- Agenda: un día, una columna por sillón, y cada turno ocupa el sillón durante **montaje + atención + esterilización**. El tiempo es continuo: un hueco de 20 minutos se ve como un hueco de 20 minutos. Un clic en un turno abre su **ficha lateral** (paciente, tratamiento, obra social, profesional, ciclo del sillón) con acciones de demostración: no guardan nada
 - Panel general: el estado de los turnos del día en una sola barra, la ocupación de cada sillón y la producción del mes
-- Pacientes: el padrón con la obra social y a quién hay que llamar
+- Pacientes: el padrón con la obra social y a quién hay que llamar. Un clic en el nombre abre la **ficha del paciente** con todos sus datos y acciones de demostración (recordatorio, agendar turno, abrir la ficha clínica). Se busca por nombre, código u obra social
 - Mensajes: cada hilo atado a un motivo clínico
 - Configuración
+- **Estados de carga y de error** en cada pantalla: mientras llegan los datos se ve un guion largo y un esqueleto estático (nunca un 0 falso), y si la carga falla aparece un aviso con el botón "Reintentar"
+- **Celular**: la navegación es una tira horizontal con un degradé en el borde donde hay más secciones, y la sección activa queda centrada
 
 ## Requisitos (instalá esto primero)
 
@@ -79,7 +81,7 @@ Todos los datos que ves (pacientes, turnos, fichas, mensajes) viven en archivos 
 - `modules/conversaciones/data.json`: los hilos de mensajes
 - `modules/dashboard/data.json`: lo que muestra el panel
 
-Editá un archivo, guardá y recargá la página para ver el cambio. Los datos son **solo de lectura**: si en la pantalla cambiás el estado de una cara del odontograma, ese cambio vive solo en el navegador. Al apretar F5 todo vuelve a como está en el JSON, y nada se guarda en ningún lado.
+Editá un archivo, guardá y recargá la página para ver el cambio. Ojo: el panel (`dashboard/data.json`) resume los turnos de la agenda a las 11:05, la hora fija de la demo (`AHORA` en `modules/agenda/api.ts`). Si cambiás el estado de un turno, ajustá también `jornada`, `proximos` y `ocupacion` para que las cifras sigan coincidiendo. Los datos son **solo de lectura**: si en la pantalla cambiás el estado de una cara del odontograma, ese cambio vive solo en el navegador. Al apretar F5 todo vuelve a como está en el JSON, y nada se guarda en ningún lado.
 
 Todos los nombres, teléfonos y mails de ejemplo son inventados.
 

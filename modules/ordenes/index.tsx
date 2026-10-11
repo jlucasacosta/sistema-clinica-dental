@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from "react"
 import { AlertTriangle, History, Pencil } from "lucide-react"
 import { getFichas, piezasEnVisita, type Ficha } from "./api"
+import { Esqueleto, ErrorCarga, useCarga } from "@/shell/carga"
 import { Odontograma, PiezaHeroe, MuestraEstado, type Pieza } from "@/shell/odontograma"
 import {
   ESTADOS,
@@ -33,7 +34,7 @@ function BarraPlan({ ficha }: { ficha: Ficha }) {
   return (
     <div>
       <div className="flex items-baseline justify-between">
-        <p className="text-[0.6875rem] text-muted">{ficha.plan.nombre}</p>
+        <p className="text-xs text-muted">{ficha.plan.nombre}</p>
         <p className={"dato text-xs font-semibold " + (abandonado ? "text-danger" : "text-fg")}>
           {ficha.plan.sesionesHechas}/{ficha.plan.sesionesTotales} sesiones
         </p>
@@ -45,7 +46,7 @@ function BarraPlan({ ficha }: { ficha: Ficha }) {
         />
       </div>
       {abandonado && (
-        <p className="mt-1.5 flex items-center gap-1 text-[0.6875rem] font-semibold text-danger">
+        <p className="mt-1.5 flex items-center gap-1 text-xs font-semibold text-danger">
           <AlertTriangle size={12} strokeWidth={1.5} />
           Plan abandonado: {ficha.diasSinSesion} días sin sesión
         </p>
@@ -55,8 +56,11 @@ function BarraPlan({ ficha }: { ficha: Ficha }) {
 }
 
 export function OrdenesPage() {
-  const [fichas, setFichas] = useState<Ficha[]>([])
-  const [selId, setSelId] = useState<string | null>(null)
+  const { data, error, cargando, reintentar } = useCarga(getFichas)
+  const fichas = useMemo(() => data ?? [], [data])
+  const [selIdElegido, setSelId] = useState<string | null>(null)
+  // Sin eleccion del usuario se muestra la primera ficha (o la que pida ?ficha=F-xxxx, ver abajo).
+  const selId = selIdElegido ?? fichas[0]?.id ?? null
   const [visitaSel, setVisita] = useState(0)
   const [modo, setModo] = useState<"editar" | "timelapse">("timelapse")
   const [edicion, setEdicion] = useState<Pieza[] | null>(null)
@@ -65,12 +69,12 @@ export function OrdenesPage() {
   // Mensaje para el lector de pantalla: cada cambio de cara se anuncia (role="status").
   const [anuncio, setAnuncio] = useState("")
 
+  // La agenda abre la ficha de un turno con /ordenes?ficha=F-1042: si existe, arranca ahi.
   useEffect(() => {
-    getFichas().then((fs) => {
-      setFichas(fs)
-      setSelId(fs[0]?.id ?? null)
-    })
-  }, [])
+    if (!fichas.length) return
+    const pedida = new URLSearchParams(window.location.search).get("ficha")
+    if (pedida && fichas.some((f) => f.id === pedida)) setSelId(pedida)
+  }, [fichas])
 
   const ficha = fichas.find((f) => f.id === selId)
   // Al elegir otro paciente, el primer render todavia trae el indice del anterior: se acota a las visitas de esta ficha
@@ -116,22 +120,35 @@ export function OrdenesPage() {
   const afectadas = piezas.filter((p) => esPatologica(estadoDePieza(p.caras))).length
   const piezaHeroe = piezas.find((p) => p.fdi === heroe) ?? piezas[0]
 
+  const titulo = (
+    <div>
+      <h1 className="font-heading text-2xl font-bold tracking-tight">Fichas clínicas</h1>
+      <p className="text-xs text-muted">
+        Tocá una cara para cambiar su estado. Arrastrá el historial para ver la boca en el tiempo.
+      </p>
+    </div>
+  )
+
+  if (error) {
+    return (
+      <div className="space-y-5">
+        {titulo}
+        <ErrorCarga onReintentar={reintentar} />
+      </div>
+    )
+  }
+
   return (
     <div className="space-y-5">
       <p role="status" className="sr-only">
         {anuncio}
       </p>
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <h1 className="font-heading text-2xl font-bold tracking-tight">Fichas clínicas</h1>
-          <p className="text-[0.6875rem] text-muted">
-            Tocá una cara para cambiar su estado. Arrastrá el historial para ver la boca en el tiempo.
-          </p>
-        </div>
-      </div>
+      {titulo}
 
-      <div className="grid gap-4 xl:grid-cols-[15rem_1fr]">
+      <div aria-busy={cargando} className="grid gap-4 xl:grid-cols-[15rem_1fr]">
         {/* padron de fichas */}
+        {cargando && <Esqueleto className="h-72" />}
+        {!cargando && (
         <ul aria-label="Fichas de pacientes" className="surface-card max-h-[38rem] overflow-y-auto p-2">
           {fichas.map((f) => (
             <li key={f.id}>
@@ -145,14 +162,16 @@ export function OrdenesPage() {
                 }
               >
                 <span className="truncate text-xs font-semibold">{f.paciente}</span>
-                <span className="dato text-[0.6875rem] text-muted">
+                <span className="dato text-xs text-muted">
                   {f.id} · {f.edad} años
                 </span>
               </button>
             </li>
           ))}
         </ul>
+        )}
 
+        {cargando && <Esqueleto className="h-[34rem]" />}
         {ficha && piezaHeroe && (
           // min-w-0: un item de grid trae `min-width:auto` y se niega a encoger por
           // debajo de su contenido. Sin esto el panel del plan se sale del `main`,
@@ -165,7 +184,7 @@ export function OrdenesPage() {
               </span>
               <div className="min-w-0 flex-1">
                 <h2 className="font-heading text-lg font-bold leading-tight">{ficha.paciente}</h2>
-                <p className="dato text-[0.6875rem] text-muted">
+                <p className="dato text-xs text-muted">
                   {ficha.edad} años · {ficha.obraSocial} · última visita {ficha.ultimaVisita}
                 </p>
                 <div className="mt-1.5 flex flex-wrap gap-1.5">
@@ -226,10 +245,10 @@ export function OrdenesPage() {
                 {/* EL SCRUBBER: el componente estrella. */}
                 <div className="mt-5 border-t border-border pt-4">
                   <div className="flex items-baseline justify-between">
-                    <p className="text-[0.6875rem] font-semibold uppercase tracking-wide text-muted">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-muted">
                       Historial clínico
                     </p>
-                    <p className="dato text-[0.6875rem] text-muted">
+                    <p className="dato text-xs text-muted">
                       visita {visita + 1} de {ficha.visitas.length}
                     </p>
                   </div>
@@ -252,24 +271,24 @@ export function OrdenesPage() {
                     <p className="dato text-xs font-semibold text-primary">
                       {ficha.visitas[visita].fecha}
                     </p>
-                    <p className="text-[0.6875rem] text-muted">{ficha.visitas[visita].profesional}</p>
+                    <p className="text-xs text-muted">{ficha.visitas[visita].profesional}</p>
                   </div>
-                  <p className="mt-1 text-[0.6875rem] leading-snug text-muted">{ficha.visitas[visita].nota}</p>
+                  <p className="mt-1 text-xs leading-snug text-muted">{ficha.visitas[visita].nota}</p>
                 </div>
               </div>
 
               {/* la PIEZA HEROE + el contador que sube */}
               <div className="surface-card flex flex-col gap-4 p-4">
                 <div>
-                  <p className="text-[0.6875rem] uppercase tracking-wide text-muted">Piezas con patología</p>
-                  <p key={afectadas} aria-live="polite" className="contador-sube font-heading text-4xl font-bold leading-none text-danger">
+                  <p className="text-xs uppercase tracking-wide text-muted">Piezas con patología</p>
+                  <p aria-live="polite" className="font-heading text-4xl font-bold leading-none text-danger">
                     {afectadas}
                   </p>
                 </div>
 
                 <div className="border-t border-border pt-3">
-                  <p className="text-[0.6875rem] font-semibold">{nombrePieza(piezaHeroe.fdi)}</p>
-                  <p className="mb-2 text-[0.6875rem] text-muted">
+                  <p className="text-xs font-semibold">{nombrePieza(piezaHeroe.fdi)}</p>
+                  <p className="mb-2 text-xs text-muted">
                     {modo === "editar" ? "tocá una cara para cambiarla" : "modo lectura"}
                   </p>
                   <PiezaHeroe
@@ -281,16 +300,16 @@ export function OrdenesPage() {
                 </div>
 
                 <div className="border-t border-border pt-3">
-                  <p className="mb-2 text-[0.6875rem] uppercase tracking-wide text-muted">Referencias</p>
+                  <p className="mb-2 text-xs uppercase tracking-wide text-muted">Referencias</p>
                   <ul className="space-y-1">
                     {ESTADOS.map((e) => (
-                      <li key={e} className="flex items-center gap-2 text-[0.6875rem]">
+                      <li key={e} className="flex items-center gap-2 text-xs">
                         <MuestraEstado estado={e} />
                         <span className="text-muted">{e}</span>
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-2 text-[0.6875rem] leading-snug text-muted">
+                  <p className="mt-2 text-xs leading-snug text-muted">
                     &quot;a extraer&quot; se distingue de &quot;caries&quot; por la cruz, no por el color.
                   </p>
                 </div>
@@ -310,14 +329,14 @@ export function OrdenesPage() {
                         key={p.fdi}
                         type="button"
                         onClick={() => setHeroe(p.fdi)}
-                        className={"chip target px-3 transition-transform hover:scale-105 " + chipEstado[e]}
+                        className={"chip target px-3 transition-colors hover:opacity-80 " + chipEstado[e]}
                       >
                         <span className="fdi">{p.fdi}</span> {e}
                       </button>
                     )
                   })}
                 {piezas.every((p) => estadoDePieza(p.caras) === "sana") && (
-                  <p className="text-[0.6875rem] text-muted">Boca sana en esta visita.</p>
+                  <p className="text-xs text-muted">Boca sana en esta visita.</p>
                 )}
               </div>
             </div>

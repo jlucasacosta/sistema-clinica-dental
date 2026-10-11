@@ -85,6 +85,7 @@ export const caraStroke: Record<EstadoPieza, string> = {
   "a extraer": "stroke-danger",
 }
 export const chipEstado: Record<EstadoPieza, string> = {
+  // sana y ausente: neutros por diseño (excepción §9, ver DISENO.md). Siempre con su rótulo de texto.
   sana: "bg-subtle text-muted",
   caries: "bg-danger/15 text-danger",
   obturada: "bg-info/15 text-info",
@@ -134,6 +135,13 @@ export function nivelDeRecall(diasDesdeUltimaVisita: number): NivelRecall {
   return "al dia"
 }
 
+// Rótulo de display del nivel (el valor del enum no lleva tilde: lo compara el código).
+export const rotuloRecall: Record<NivelRecall, string> = {
+  "al dia": "al día",
+  "a llamar": "a llamar",
+  perdido: "perdido",
+}
+
 export const chipRecall: Record<NivelRecall, string> = {
   "al dia": "bg-success/15 text-success",
   "a llamar": "bg-warning/15 text-warning",
@@ -147,23 +155,24 @@ export const ESTADOS_TURNO: EstadoTurno[] = ["atendido", "en sala", "confirmado"
 
 export const chipTurno: Record<EstadoTurno, string> = {
   confirmado: "bg-info/15 text-info",
-  "en sala": "bg-primary/15 text-primary",
+  "en sala": "bg-warning/15 text-warning", // en curso: ámbar, no la familia del verde de atendido
   atendido: "bg-success/15 text-success",
   ausente: "bg-danger/15 text-danger",
-  cancelado: "bg-subtle text-muted", // estado neutro: no es un error, no va en danger
+  // Neutro por diseño (CLAUDE.md §9, excepción 2026-10-11): lleva rótulo, contraste >=4.5:1 y está pedido en DISENO.md.
+  cancelado: "bg-subtle text-muted",
 }
 // El relleno de la banda de ATENCION del bloque de turno (la del medio del tri-banda).
 // Literal, con la opacidad ya adentro: `rellenoTurno[e] + "/20"` no lo ve Tailwind.
 export const bandaAtencion: Record<EstadoTurno, string> = {
   confirmado: "bg-info/20",
-  "en sala": "bg-primary/20",
+  "en sala": "bg-warning/20",
   atendido: "bg-success/20",
   ausente: "bg-danger/20",
   cancelado: "bg-subtle",
 }
 export const rellenoTurno: Record<EstadoTurno, string> = {
   confirmado: "bg-info",
-  "en sala": "bg-primary",
+  "en sala": "bg-warning",
   atendido: "bg-success",
   ausente: "bg-danger",
   cancelado: "bg-muted",
@@ -171,7 +180,7 @@ export const rellenoTurno: Record<EstadoTurno, string> = {
 // El segmento de la barra-estado-jornada.
 export const segmentoTurno: Record<EstadoTurno, string> = {
   confirmado: "bg-info/30",
-  "en sala": "bg-primary/30",
+  "en sala": "bg-warning/30",
   atendido: "bg-success/30",
   ausente: "bg-danger/30",
   cancelado: "bg-subtle",
@@ -184,6 +193,7 @@ export const chipOS: Record<EstadoOS, string> = {
   aprobada: "bg-success/15 text-success",
   "en tramite": "bg-warning/15 text-warning",
   rechazada: "bg-danger/15 text-danger",
+  // Neutro por diseño (excepción §9, ver DISENO.md): paciente sin obra social, no es un problema. Rótulo siempre visible.
   particular: "bg-subtle text-muted",
 }
 // Rotulo de display. El VALOR del enum no se toca (lo compara el codigo y lo valida un CHECK

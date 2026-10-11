@@ -28,6 +28,11 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 export const APERTURA = 8 * 60
 export const CIERRE = 19 * 60
 
+// La hora de la demo, fija: los estados de los turnos y los "en X min" del tablero estan escritos
+// para este momento (11:05). Con un reloj real la linea de AHORA contradeciria los estados.
+// Con backend real: la hora actual del consultorio.
+export const AHORA = 11 * 60 + 5
+
 export async function getSillones(): Promise<Sillon[]> {
   await sleep(150)
   return structuredClone(raw.sillones) as Sillon[]

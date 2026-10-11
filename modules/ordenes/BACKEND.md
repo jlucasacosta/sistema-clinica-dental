@@ -9,3 +9,4 @@
 - Historia clínica: registro médico-legal. `UPDATE` y `DELETE` en lote PROHIBIDOS;
   las correcciones van como una visita nueva. RLS por profesional + auditoría append-only.
 - Reemplazar: modules/ordenes/api.ts. Misma firma.
+- La carga usa `useCarga` (aviso de error con "Reintentar"). /ordenes?ficha=<id> selecciona esa ficha.

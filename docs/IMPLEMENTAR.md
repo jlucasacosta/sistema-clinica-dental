@@ -728,7 +728,7 @@ export async function createClient() {
 
 ### 3.8 Antes y después: una función real
 
-Todos los módulos del demo son componentes de cliente que llaman a `api.ts` desde un `useEffect`, así que acá se usa el cliente de navegador. Tomamos `getPacientes` de `modules/contactos/api.ts`.
+Todos los módulos del demo son componentes de cliente que llaman a `api.ts` a través del hook `useCarga` (`shell/carga.tsx`), así que acá se usa el cliente de navegador. Tomamos `getPacientes` de `modules/contactos/api.ts`.
 
 **Antes (demo):**
 
@@ -774,9 +774,11 @@ export async function getPacientes(): Promise<Paciente[]> {
 
 Tres cosas para tener en cuenta:
 
-- **El manejo de error es parte del cambio.** El demo no falla nunca; la base sí. Hoy las pantallas no tienen estado de error: agregá uno (un mensaje "No se pudo cargar" con un botón para reintentar) cuando conectes el primer módulo.
+- **El manejo de error ya está en las pantallas.** El demo no falla nunca; la base sí. Cada módulo carga con `useCarga`: muestra "—" y un esqueleto estático mientras llegan los datos, y si la función de `api.ts` rechaza la promesa (lanzá el error con `throw`), muestra "No pudimos cargar los datos" con un botón "Reintentar". Solo tenés que dejar que el error suba: no lo atrapes dentro de `api.ts`.
 - **Traducí siempre `snake_case` a `camelCase` en el `api.ts`.** Así los componentes no cambian.
 - **Para `getFichas`** necesitás una consulta anidada: `.from("fichas").select("*, pacientes(*), visitas(*, lesiones(*))")`. Después armás el objeto `Ficha` con el mismo mapeo (`plan_sesiones_hechas` → `plan.sesionesHechas`, y así). `paciente`, `edad`, `obraSocial`, `estadoOS`, `ultimaVisita` y `alertas` vienen de la tabla `pacientes` (la ficha no los repite). Con el rol `recepcion` esa consulta devuelve `visitas` vacías: es lo esperado.
+- **La hora de la agenda.** El demo dibuja la línea de "ahora" en una hora fija (`AHORA`, 11:05, en `modules/agenda/api.ts`) porque los estados de los turnos están escritos para ese momento. Con base de datos usá la hora real del consultorio.
+- **Abrir una ficha desde la agenda.** El botón "Abrir ficha clínica" del turno navega a `/ordenes?ficha=F-1042` (el id de la ficha del turno); la pantalla de fichas la selecciona si existe.
 - **Para `getTurnosDia(fecha)`** filtrá con `.eq("fecha", fecha)`. Hoy el demo ignora el parámetro y devuelve el mismo día siempre; con base de datos pasale una fecha `YYYY-MM-DD` real.
 
 Opcional pero útil: generá los tipos de tu base y dejá que TypeScript te avise si un nombre de columna está mal.

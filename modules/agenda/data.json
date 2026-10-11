@@ -89,14 +89,14 @@
       "tratamiento": "Obturación 17",
       "inicio": 940,
       "duracion": 50,
-      "estado": "ausente",
+      "estado": "confirmado",
       "obraSocial": "Mutual Aurora"
     },
     {
       "id": "T-06",
       "sillonId": "S1",
       "dentistaId": "D3",
-      "paciente": "Tomas Escalante",
+      "paciente": "Tomás Escalante",
       "fichaId": "F-1051",
       "tratamiento": "Consulta inicial",
       "inicio": 1040,
@@ -108,12 +108,12 @@
       "id": "T-07",
       "sillonId": "S2",
       "dentistaId": "D2",
-      "paciente": "Joaquin Bentancor",
+      "paciente": "Joaquín Bentancor",
       "fichaId": "F-1043",
       "tratamiento": "Corona definitiva 25",
       "inicio": 480,
       "duracion": 80,
-      "estado": "atendido",
+      "estado": "ausente",
       "obraSocial": "Círculo Salud"
     },
     {
@@ -125,7 +125,7 @@
       "tratamiento": "Extracción 27",
       "inicio": 600,
       "duracion": 70,
-      "estado": "atendido",
+      "estado": "ausente",
       "obraSocial": "Mutual Aurora"
     },
     {
@@ -137,7 +137,7 @@
       "tratamiento": "Extracción cordal 28",
       "inicio": 710,
       "duracion": 90,
-      "estado": "en sala",
+      "estado": "confirmado",
       "obraSocial": "Prevención Sur"
     },
     {
@@ -156,7 +156,7 @@
       "id": "T-11",
       "sillonId": "S2",
       "dentistaId": "D2",
-      "paciente": "Sofia Etchegaray",
+      "paciente": "Sofía Etchegaray",
       "fichaId": "F-1053",
       "tratamiento": "Endodoncia 46",
       "inicio": 990,
@@ -180,7 +180,7 @@
       "id": "T-13",
       "sillonId": "S3",
       "dentistaId": "D3",
-      "paciente": "Federico Olguin",
+      "paciente": "Federico Olguín",
       "fichaId": "F-1055",
       "tratamiento": "Obturación 24",
       "inicio": 590,
@@ -197,7 +197,7 @@
       "tratamiento": "Control post extracción",
       "inicio": 680,
       "duracion": 20,
-      "estado": "atendido",
+      "estado": "confirmado",
       "obraSocial": "Círculo Salud"
     },
     {
@@ -216,7 +216,7 @@
       "id": "T-16",
       "sillonId": "S3",
       "dentistaId": "D1",
-      "paciente": "Lucia Sanguinetti",
+      "paciente": "Lucía Sanguinetti",
       "fichaId": "F-1058",
       "tratamiento": "Profilaxis",
       "inicio": 880,
@@ -228,12 +228,12 @@
       "id": "T-17",
       "sillonId": "S3",
       "dentistaId": "D3",
-      "paciente": "Nicolas Baigorria",
+      "paciente": "Nicolás Baigorria",
       "fichaId": "F-1059",
       "tratamiento": "Consulta de urgencia",
       "inicio": 980,
       "duracion": 30,
-      "estado": "ausente",
+      "estado": "confirmado",
       "obraSocial": "Mutual Aurora"
     },
     {
@@ -264,7 +264,7 @@
       "id": "T-20",
       "sillonId": "S4",
       "dentistaId": "D3",
-      "paciente": "Gaston Uriburu",
+      "paciente": "Gastón Uriburu",
       "fichaId": "F-1061",
       "tratamiento": "Profilaxis",
       "inicio": 1020,

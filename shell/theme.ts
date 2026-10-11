@@ -69,7 +69,7 @@ export const esmalte: Theme = {
     // par tiene que llegar a 4.5:1 sobre surface, subtle (fila en hover) y bg. Los valores
     // originales (#15803d, #b45309, #c81e1e, #2563eb) daban 4.1-4.5 sobre surface y 3.8-3.9
     // sobre bg: se oscurecieron al minimo hacia fg, sin cambiar el hue.
-    success: "#156d38",
+    success: "#156a36",
     warning: "#944a0e", // ambar oscuro: legible como texto. Lee como "tapa dorada" en la corona.
     danger: "#b41f1f",
     info: "#2257c5",

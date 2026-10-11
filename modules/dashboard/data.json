@@ -1,8 +1,8 @@
 {
   "jornada": {
-    "atendido": 7,
-    "en sala": 2,
-    "confirmado": 7,
+    "atendido": 3,
+    "en sala": 1,
+    "confirmado": 12,
     "ausente": 3,
     "cancelado": 1
   },
@@ -49,6 +49,14 @@
     },
     {
       "id": "2",
+      "hora": "11:20",
+      "paciente": "Antonella Prieto",
+      "tratamiento": "Control post extracción",
+      "sillon": "Sillón 3",
+      "minutosPara": 15
+    },
+    {
+      "id": "3",
       "hora": "11:50",
       "paciente": "Abril Nardelli",
       "tratamiento": "Extracción cordal 28",
@@ -56,7 +64,7 @@
       "minutosPara": 45
     },
     {
-      "id": "3",
+      "id": "4",
       "hora": "12:00",
       "paciente": "Carla Vanzetti",
       "tratamiento": "Corona provisoria",
@@ -64,7 +72,7 @@
       "minutosPara": 55
     },
     {
-      "id": "4",
+      "id": "5",
       "hora": "13:00",
       "paciente": "Diego Aramburu",
       "tratamiento": "Férula de descarga",
@@ -72,20 +80,12 @@
       "minutosPara": 115
     },
     {
-      "id": "5",
+      "id": "6",
       "hora": "13:30",
       "paciente": "Camila Duarte",
       "tratamiento": "Control de ortodoncia",
       "sillon": "Sillón 1",
       "minutosPara": 145
-    },
-    {
-      "id": "6",
-      "hora": "14:20",
-      "paciente": "Ignacio Zabaleta",
-      "tratamiento": "Endodoncia 36, sesión 2",
-      "sillon": "Sillón 2",
-      "minutosPara": 195
     }
   ],
   "recall": [
@@ -105,7 +105,7 @@
     },
     {
       "id": "3",
-      "paciente": "Hernan Zubizarreta",
+      "paciente": "Hernán Zubizarreta",
       "motivo": "Control semestral",
       "dias": 214,
       "telefono": "+54 9 341 273-6605"
@@ -119,7 +119,7 @@
     },
     {
       "id": "5",
-      "paciente": "Matias Ferreyra",
+      "paciente": "Matías Ferreyra",
       "motivo": "Prótesis sin retirar",
       "dias": 401,
       "telefono": "+54 9 261 634-8815"
@@ -135,22 +135,22 @@
   "ocupacion": [
     {
       "sillon": "Sillón 1",
-      "ocupado": 300,
+      "ocupado": 450,
       "disponible": 660
     },
     {
       "sillon": "Sillón 2",
-      "ocupado": 510,
+      "ocupado": 560,
       "disponible": 660
     },
     {
       "sillon": "Sillón 3",
-      "ocupado": 240,
+      "ocupado": 320,
       "disponible": 660
     },
     {
       "sillon": "Sillón 4",
-      "ocupado": 170,
+      "ocupado": 260,
       "disponible": 660
     }
   ]

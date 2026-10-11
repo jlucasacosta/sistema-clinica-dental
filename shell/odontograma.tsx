@@ -214,7 +214,6 @@ function PiezaEnArcada({
   tabStop,
   caraPulsada,
   interactivo,
-  indice,
 }: {
   pieza: Pieza
   onCara?: (fdi: number, cara: Cara) => void
@@ -223,13 +222,9 @@ function PiezaEnArcada({
   tabStop: boolean
   caraPulsada?: Cara | null
   interactivo: boolean
-  indice: number
 }) {
   return (
-    <div
-      className="brotando flex flex-col items-center gap-1"
-      style={{ animationDelay: `${indice * 12}ms` }}
-    >
+    <div className="flex flex-col items-center gap-1">
       {/* La pieza es UN radio del grupo: nombre = pieza + estado, foco = seleccion. */}
       <div
         role="radio"
@@ -246,7 +241,7 @@ function PiezaEnArcada({
       </div>
       <span
         aria-hidden
-        className={"fdi text-[0.6875rem] " + (seleccionada ? "font-bold text-primary" : "text-muted")}
+        className={"fdi text-xs " + (seleccionada ? "font-bold text-primary" : "text-muted")}
       >
         {pieza.fdi}
       </span>
@@ -278,11 +273,10 @@ function Arcada({
     <div className="flex items-start justify-center gap-3">
       {cuadrantes.map((c, ci) => (
         <div key={c} className="flex items-start gap-1">
-          {de(c).map((p, i) => (
+          {de(c).map((p) => (
             <PiezaEnArcada
               key={p.fdi}
               pieza={p}
-              indice={ci * 8 + i}
               seleccionada={rest.seleccionada === p.fdi}
               tabStop={foco === p.fdi}
               caraPulsada={rest.pulso?.fdi === p.fdi ? rest.pulso.cara : null}
@@ -394,7 +388,7 @@ export function PiezaHeroe({
       <DienteSVG pieza={pieza} onCara={onCara} caraPulsada={pulso ?? null} interactivo={interactivo} tamano={190} />
       <div className="text-center">
         <p className="fdi text-3xl font-bold leading-none">{pieza.fdi}</p>
-        <p className="mt-1 text-[0.6875rem] text-muted">
+        <p className="mt-1 text-xs text-muted">
           {rotuloCaraCentral(pieza.fdi) === "incisal" ? "cara incisal" : "cara oclusal"} en el centro
         </p>
       </div>
@@ -420,12 +414,12 @@ export function PiezaHeroe({
                     type="button"
                     onClick={() => onCara?.(pieza.fdi, cara)}
                     aria-label={`Cara ${rotulo} de la pieza ${pieza.fdi}: ${estado}. Cambiar al estado siguiente`}
-                    className="target flex w-full items-center justify-between rounded-xl border border-border px-2.5 text-[0.6875rem] transition-colors hover:bg-subtle"
+                    className="target flex w-full items-center justify-between rounded-xl border border-border px-2.5 text-xs transition-colors hover:bg-subtle"
                   >
                     {contenido}
                   </button>
                 ) : (
-                  <p className="flex items-center justify-between text-[0.6875rem]">{contenido}</p>
+                  <p className="flex items-center justify-between text-xs">{contenido}</p>
                 )}
               </li>
             )

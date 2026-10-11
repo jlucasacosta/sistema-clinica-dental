@@ -119,3 +119,20 @@ La ficha queda cerrada: no cambian las palancas, la tipografía ni los arquetipo
 - `accent` (coral) no cambia. Se agrega un derivado `accent-ink` (acento mezclado 45 % con `fg`) para usarlo como texto, porque el coral solo llega a 3.0:1 sobre blanco.
 - La cara `sana` vuelve a ser contorno `muted`, como dice la tabla de estados de arriba.
 - Cada estado de cara suma una marca de forma (obturada = punto, corona = anillo, endodoncia = barra) para no depender solo del color.
+
+---
+
+## Nota 2026-10-11: correcciones tras la crítica de diseño (decisión de Lucas)
+
+Lucas pidió que el sistema se vea más profesional, como un CRM normal, sin animaciones decorativas, y que se corrija todo lo que dejó la crítica. La ficha de diseño no cambia (palancas, tipografía, arquetipos). Lo que cambia, y por qué:
+
+- **Grises neutros: excepción documentada (CLAUDE.md §9).** Estos cuatro estados van en gris porque son neutros por diseño, y se piden acá: **sana** y **ausente** (estado de pieza, en `chipEstado`), **particular** (obra social, en `chipOS`) y **cancelado** (turno, en `chipTurno`). Cumplen las tres condiciones: texto `muted` sobre `subtle` a 4,84:1 (≥4,5:1), rótulo de texto siempre visible (nunca solo color ni un punto) y este pedido. "Particular" no es un problema de cobro y "cancelado" no es un error: ninguno merece rojo ni ámbar. Esto reemplaza la frase "cero gris" de más arriba para esos cuatro.
+- **Turno "en sala" pasa de teal a ámbar (`warning`).** El teal (primary) y el verde de "atendido" eran la misma familia con significados distintos. Ahora: confirmado = azul, en sala = ámbar (en curso), atendido = verde, ausente = rojo, cancelado = gris neutro. El rojo queda para ausente, obra social rechazada, recall perdido y alertas médicas. El coral del estado "endodoncia" del odontograma queda como estaba: el diagrama tiene su exención de siete estados y se distingue por la marca de forma (la barra).
+- **Token `success`** `#156d38` pasa a `#156a36`: sobre la fila en hover (`subtle`) el chip verde daba 4,48:1; ahora 4,66:1.
+- **Movimiento serio.** Se quitaron la entrada pieza por pieza del odontograma (`brotar`), el conteo de piezas con patología que sube (`subir-contador`), el latido del turno ausente (queda un anillo rojo fijo), los `animate-pulse` de los esqueletos (ahora son estáticos) y la ampliación al pasar el mouse sobre los chips de piezas. Se conservan el pulso breve de la cara que el usuario cambia, el repintado del historial al mover el control (`transition: fill .3s`) y los cambios de color en hover y foco. Esto matiza el frame-firma de arriba: el contador pasa de 3 a 4 sin animación.
+- **La agenda corre con una hora fija (11:05)**, no con el reloj real: así la línea de "ahora", los estados de los turnos y los "en X min" del panel cuentan la misma historia. Los tres ausentes del día pasaron a la mañana (antes había "ausentes" a las 15:40 y 16:20, es decir en el futuro). El no-show de las 15:40 del frame-firma ya no forma parte de los datos.
+- **Ficha lateral** en los turnos (agenda) y en los pacientes. Reemplaza el panel fijo "Turno" de la agenda. Las acciones son de demostración y no guardan nada.
+- **Bloques de turno de 20 min:** la pista pasó de 30 a 38 rem, así un turno corto mide unos 46 px (antes ~36) y muestra una línea con el paciente.
+- **Caras del odontograma de 12-16 px:** no se tocan. La geometría es la identidad del componente y la edición precisa se hace en la pieza grande (190 px, cada cara es un botón de 44 px).
+- **Texto:** nada que lleve datos baja de 12 px (`text-xs`, 0,75 rem), chips incluidos.
+- **Nombres y menú:** el título de cada pantalla es igual a su ítem del menú (Panel, Agenda, Fichas clínicas, Mensajes, Pacientes, Configuración). El menú de escritorio queda fijo (`sticky`, alto de pantalla) con la cuenta demo al pie.
