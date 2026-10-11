@@ -69,8 +69,55 @@ Todo el diseño (colores, tipografía, nombre de la marca) vive en un solo archi
 
 Probá algo concreto: en ese archivo, subí `ciclo.esterilizacion` de `20` a `45` minutos. Toda la agenda se aprieta, porque cada bloque de turno dibuja su banda de esterilización desde ahí. Después bajá `recall.alerta` de `180` a `60` días y mirá cómo se llena de amarillo la lista de pacientes a llamar. Ningún componente tiene un número ni un color escrito a mano.
 
+## Cambiar los datos de ejemplo
+
+Todos los datos que ves (pacientes, turnos, fichas, mensajes) viven en archivos `data.json`, uno por módulo:
+
+- `modules/agenda/data.json`: sillones, profesionales y turnos del día
+- `modules/ordenes/data.json`: fichas clínicas con sus visitas y lesiones
+- `modules/contactos/data.json`: el padrón de pacientes
+- `modules/conversaciones/data.json`: los hilos de mensajes
+- `modules/dashboard/data.json`: lo que muestra el panel
+
+Editá un archivo, guardá y recargá la página para ver el cambio. Los datos son **solo de lectura**: si en la pantalla cambiás el estado de una cara del odontograma, ese cambio vive solo en el navegador. Al apretar F5 todo vuelve a como está en el JSON, y nada se guarda en ningún lado.
+
+Todos los nombres, teléfonos y mails de ejemplo son inventados.
+
+## Estructura de carpetas
+
+```
+app/          las pantallas (una carpeta por ruta) y el layout
+modules/      un módulo por pantalla: index.tsx (la UI), api.ts (las funciones) y data.json (los datos)
+shell/        el chasis: theme.ts, navegación, el odontograma y los componentes de dominio
+docs/         IMPLEMENTAR.md: la guía para conectar un backend real
+DISENO.md     la ficha de diseño: por qué se ve como se ve
+.env.example  los nombres de las variables de entorno, sin valores
+```
+
+## Llevalo a producción
+
+Este repo sigue siendo un **demo frontend sin backend conectado**: no trae base de datos, login ni tareas automáticas, y la seguridad de una clínica real no se improvisa. Cuando quieras convertirlo en un sistema real, la guía paso a paso está en **[docs/IMPLEMENTAR.md](docs/IMPLEMENTAR.md)**. Te lleva por:
+
+1. Clonar y correr local
+2. Qué función de cada `api.ts` va con qué tabla
+3. Supabase: base de datos, seguridad por rol (RLS) y login
+4. Railway: recordatorios de turno y recall de pacientes con pg-boss
+5. Vercel: publicar el sistema
+6. IA para sugerir respuestas en Mensajes
+7. Checklist de seguridad antes de cargar pacientes reales
+
+Ojo: las historias clínicas son **datos de salud**. La guía incluye un aviso de privacidad que tenés que leer antes de usar datos reales.
+
+## Licencia
+
+MIT: podés usarlo, copiarlo y modificarlo. El texto completo está en el archivo [LICENSE](LICENSE).
+
 ## Te trabaste
 
-Si algo no te salió, preguntá en el Club de la IA:
+Si algo no te salió, preguntá en el Club de la IA.
+
+## Sumate al Club de la IA
+
+Aprendé a crear tu Agencia de IA y conseguir tu primer cliente. Eso lo trabajamos adentro del Club de la IA, nuestro Skool privado.
 
 👉 https://www.skool.com/club-de-la-ia-8047/about

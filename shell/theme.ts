@@ -55,7 +55,9 @@ export const esmalte: Theme = {
   colors: {
     // teal MENTA (hue ~166): tiene que leer verde, no cyan, para no ecoar el
     // petroleo #0c5460 del taller (hue ~189).
-    primary: "#0e7c66",
+    // Era #0e7c66: oscurecido al minimo (mismo hue 168) para que el texto primary llegue
+    // a 4.5:1 sobre su tinte bg-primary/15 (ver auditorias/sistema-clinica-dental.md F-02).
+    primary: "#0f6b59",
     accent: "#f26a5a", // coral: encia y labio. La contraparte calida del quirofano.
     bg: "#f3f6f5",
     surface: "#ffffff", // en claro, la tarjeta es blanca sobre un fondo gris muy suave
@@ -63,12 +65,14 @@ export const esmalte: Theme = {
     muted: "#5c6b68",
     border: "#dde5e3",
     subtle: "#eaf0ee",
-    // Semanticos saturados para light. Los cuatro pasan 4.5:1 sobre surface blanco:
-    // green-700 y no #16a34a, que da ~3.4 y FALLA como texto.
-    success: "#15803d",
-    warning: "#b45309", // ambar oscuro: legible como texto. Lee como "tapa dorada" en la corona.
-    danger: "#c81e1e",
-    info: "#2563eb",
+    // Semanticos para light. Se usan como TEXTO sobre su propio tinte (bg-X/15 text-X) y ese
+    // par tiene que llegar a 4.5:1 sobre surface, subtle (fila en hover) y bg. Los valores
+    // originales (#15803d, #b45309, #c81e1e, #2563eb) daban 4.1-4.5 sobre surface y 3.8-3.9
+    // sobre bg: se oscurecieron al minimo hacia fg, sin cambiar el hue.
+    success: "#156d38",
+    warning: "#944a0e", // ambar oscuro: legible como texto. Lee como "tapa dorada" en la corona.
+    danger: "#b41f1f",
+    info: "#2257c5",
   },
   recall: { alerta: 180, vencido: 365 },
   noShow: { alerta: 0.15 },

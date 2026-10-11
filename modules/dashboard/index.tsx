@@ -12,7 +12,7 @@ import { theme } from "@/shell/theme"
 
 function RielProximos({ proximos }: { proximos: Proximo[] }) {
   return (
-    <ul className="flex gap-2 overflow-x-auto pb-1">
+    <ul tabIndex={0} aria-label="Próximos turnos (se desplaza con las flechas)" className="flex gap-2 overflow-x-auto pb-1">
       {proximos.map((p, i) => (
         <li
           key={p.id}
@@ -26,9 +26,9 @@ function RielProximos({ proximos }: { proximos: Proximo[] }) {
             {p.hora}
             {i === 0 && <span className="chip ml-auto bg-primary text-surface">en {p.minutosPara} min</span>}
           </p>
-          <p className="mt-1 truncate text-[11px] font-semibold">{p.paciente}</p>
-          <p className="truncate text-[10px] text-muted">{p.tratamiento}</p>
-          <p className="mt-0.5 text-[10px] text-muted">{p.sillon}</p>
+          <p className="mt-1 truncate text-[0.6875rem] font-semibold">{p.paciente}</p>
+          <p className="truncate text-[0.6875rem] text-muted">{p.tratamiento}</p>
+          <p className="mt-0.5 text-[0.6875rem] text-muted">{p.sillon}</p>
         </li>
       ))}
     </ul>
@@ -43,7 +43,7 @@ function Ocupaciones({ datos }: { datos: Ocupacion[] }) {
         const cumple = frac >= theme.ocupacion.meta
         return (
           <li key={o.sillon}>
-            <div className="flex items-baseline justify-between text-[11px]">
+            <div className="flex items-baseline justify-between text-[0.6875rem]">
               <span className="text-muted">{o.sillon}</span>
               <span className={"dato font-semibold " + (cumple ? "text-success" : "text-warning")}>
                 {Math.round(frac * 100)}%
@@ -58,7 +58,7 @@ function Ocupaciones({ datos }: { datos: Ocupacion[] }) {
           </li>
         )
       })}
-      <li className="pt-1 text-[10px] text-muted">
+      <li className="pt-1 text-[0.6875rem] text-muted">
         Meta de ocupacion: {Math.round(theme.ocupacion.meta * 100)}% del sillon.
       </li>
     </ul>
@@ -112,7 +112,7 @@ export function DashboardPage() {
       <div className="surface-card p-4">
         <div className="mb-3 flex items-baseline justify-between">
           <h2 className="font-heading text-sm font-bold">Seguimiento de pacientes</h2>
-          <p className="text-[10px] text-muted">
+          <p className="text-[0.6875rem] text-muted">
             recall a los {theme.recall.alerta} dias · perdido a los {theme.recall.vencido}
           </p>
         </div>
@@ -125,17 +125,17 @@ export function DashboardPage() {
             const chip = nivel === "al dia" ? "bg-warning/15 text-warning" : chipRecall[nivel]
             return (
               <li key={r.id} className="flex items-center gap-3 rounded-xl border border-border p-3">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/15 font-heading text-sm font-bold text-primary">
+                <span aria-hidden className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/15 font-heading text-sm font-bold text-primary">
                   {r.paciente[0]}
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-xs font-semibold">{r.paciente}</p>
-                  <p className="truncate text-[10px] text-muted">{r.motivo}</p>
-                  <p className="dato text-[10px] text-muted">{r.telefono}</p>
+                  <p className="truncate text-[0.6875rem] text-muted">{r.motivo}</p>
+                  <p className="dato text-[0.6875rem] text-muted">{r.telefono}</p>
                 </div>
                 <div className="flex flex-col items-end gap-1">
                   <span className={"chip " + chip}>{r.dias} d</span>
-                  <PhoneCall size={14} strokeWidth={1.5} className="text-muted" />
+                  <PhoneCall aria-hidden size={14} strokeWidth={1.5} className="text-muted" />
                 </div>
               </li>
             )

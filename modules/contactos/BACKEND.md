@@ -1,5 +1,5 @@
 # Backend — Pacientes (contactos)
-> Asume BACKEND_RULES.md.
+> Guía de implementación completa: docs/IMPLEMENTAR.md.
 
 - Tabla `pacientes`: nombre, fecha_nacimiento, email, telefono, obra_social,
   estado_autorizacion, alertas (text[]).

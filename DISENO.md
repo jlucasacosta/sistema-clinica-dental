@@ -108,3 +108,14 @@ Test de un segundo: **la silueta anatómica del diente con las caras pintadas**.
 `sidebar + raised` **no lo tiene nadie** (01 y 04 son sidebar+outlined; 02 es rail+raised), y no repite el `topbar + flat` del vecino de cola.
 
 **ESQUELETO** — cuatro arquetipos nuevos (`odontograma-interactivo`, `agenda-sillon-ciclo`, `tablero-jornada`, `barra-estado-jornada`) · combo KPI + gráfico único, y el `donut` **cierra el catálogo de gráficos** · estrella (`odontograma-timelapse`) que nadie tiene · eliminado real (vista mensual de agenda) · cero imágenes de personas.
+
+---
+
+## Ajustes de accesibilidad posteriores a la ficha (auditoria 2026-10-10)
+
+La ficha queda cerrada: no cambian las palancas, la tipografia ni los arquetipos. Solo se tocaron valores de token para que el texto llegue a 4.5:1 (detalle en `auditorias/sistema-clinica-dental.md`, F-02 y F-07):
+
+- `primary` `#0e7c66` -> `#0f6b59`, `success` `#15803d` -> `#156d38`, `warning` `#b45309` -> `#944a0e`, `danger` `#c81e1e` -> `#b41f1f`, `info` `#2563eb` -> `#2257c5`. Mismo hue, oscurecidos el minimo hacia `fg`. El teal sigue leyendo verde-menta (hue 168).
+- `accent` (coral) no cambia. Se agrega un derivado `accent-ink` (acento mezclado 45 % con `fg`) para usarlo como texto, porque el coral solo llega a 3.0:1 sobre blanco.
+- La cara `sana` vuelve a ser contorno `muted`, como dice la tabla de estados de arriba.
+- Cada estado de cara suma una marca de forma (obturada = punto, corona = anillo, endodoncia = barra) para no depender solo del color.

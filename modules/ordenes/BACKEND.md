@@ -1,5 +1,5 @@
 # Backend — Ficha clinica y odontograma
-> Asume BACKEND_RULES.md.
+> Guía de implementación completa: docs/IMPLEMENTAR.md.
 
 - Tabla `visitas` (ficha_id, fecha, profesional_id, nota) y `lesiones`
   (visita_id, fdi smallint, cara text | 'todas', estado text).

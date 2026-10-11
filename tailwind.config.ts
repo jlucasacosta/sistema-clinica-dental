@@ -14,6 +14,8 @@ export default {
       colors: {
         primary: token("primary"),
         accent: token("accent"),
+        // accent mezclado con fg: el coral NO llega a 4.5:1 como texto, esta variante si.
+        "accent-ink": token("accent-ink"),
         bg: token("bg"),
         surface: token("surface"),
         fg: token("fg"),

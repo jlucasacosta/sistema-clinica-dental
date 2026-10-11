@@ -17,16 +17,19 @@ function Marca({ compact = false }: { compact?: boolean }) {
     .slice(0, 2)
     .map((p) => p[0])
     .join("")
+  // Las iniciales son decoracion: el nombre de la marca ya esta en texto al lado
+  // (en el rail compacto, `aria-label` en el link del logo no existe: el nombre va sr-only).
   if (compact) {
     return (
       <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary font-heading text-sm font-bold text-surface">
-        {iniciales}
+        <span aria-hidden>{iniciales}</span>
+        <span className="sr-only">{theme.brand.name}</span>
       </span>
     )
   }
   return (
     <span className="flex items-center gap-2.5">
-      <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary font-heading text-xs font-bold text-surface">
+      <span aria-hidden className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary font-heading text-xs font-bold text-surface">
         {iniciales}
       </span>
       <span className="font-heading text-lg font-semibold tracking-tight">{theme.brand.name}</span>
@@ -37,31 +40,62 @@ function Marca({ compact = false }: { compact?: boolean }) {
 // --- sidebar: herramienta de escritorio. Targets grandes: se opera con guantes. ---
 function Sidebar({ path }: { path: string }) {
   return (
-    <aside className="flex w-60 shrink-0 flex-col border-r border-border bg-surface p-[var(--pad)]">
-      <div className="mb-8 px-1 pt-1">
-        <Marca />
-      </div>
-      <nav className="space-y-1">
-        {nav.map(({ label, href, icon: Icon }) => {
-          const active = path === href
-          return (
-            <Link
-              key={href}
-              href={href}
-              className={
-                "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors " +
-                (active
-                  ? "bg-primary font-medium text-surface"
-                  : "text-muted hover:bg-subtle hover:text-fg")
-              }
-            >
-              <Icon size={19} strokeWidth={TRAZO} />
-              {label}
-            </Link>
-          )
-        })}
-      </nav>
-    </aside>
+    <>
+      {/* desde md: sidebar de escritorio, identica al diseno original */}
+      <aside className="hidden w-60 shrink-0 flex-col border-r border-border bg-surface p-[var(--pad)] md:flex">
+        <div className="mb-8 px-1 pt-1">
+          <Marca />
+        </div>
+        <nav aria-label="Principal" className="space-y-1">
+          {nav.map(({ label, href, icon: Icon }) => {
+            const active = path === href
+            return (
+              <Link
+                key={href}
+                href={href}
+                aria-current={active ? "page" : undefined}
+                className={
+                  "target flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors " +
+                  (active
+                    ? "bg-primary font-medium text-surface"
+                    : "text-muted hover:bg-subtle hover:text-fg")
+                }
+              >
+                <Icon size={19} strokeWidth={TRAZO} />
+                {label}
+              </Link>
+            )
+          })}
+        </nav>
+      </aside>
+
+      {/* bajo md: la misma navegacion como cabecera con scroll horizontal. Sin esto la
+          sidebar de 15rem se comia 240px de un viewport de 390px. */}
+      <header className="sticky top-0 z-10 border-b border-border bg-surface md:hidden">
+        <div className="px-[var(--pad)] pt-3">
+          <Marca />
+        </div>
+        <nav aria-label="Principal" className="flex gap-1 overflow-x-auto px-[var(--pad)] py-2">
+          {nav.map(({ label, href, icon: Icon }) => {
+            const active = path === href
+            return (
+              <Link
+                key={href}
+                href={href}
+                aria-current={active ? "page" : undefined}
+                className={
+                  "target flex shrink-0 items-center gap-2 rounded-xl px-3 py-2 text-sm transition-colors " +
+                  (active ? "bg-primary font-medium text-surface" : "text-muted hover:bg-subtle hover:text-fg")
+                }
+              >
+                <Icon size={17} strokeWidth={TRAZO} />
+                {label}
+              </Link>
+            )
+          })}
+        </nav>
+      </header>
+    </>
   )
 }
 
@@ -71,15 +105,16 @@ function Topbar({ path }: { path: string }) {
     <header className="sticky top-0 z-10 border-b border-border bg-surface">
       <div className="flex items-center gap-8 px-[var(--pad)] py-3">
         <Marca />
-        <nav className="flex flex-1 items-center gap-1 overflow-x-auto">
+        <nav aria-label="Principal" className="flex flex-1 items-center gap-1 overflow-x-auto">
           {nav.map(({ label, href, icon: Icon }) => {
             const active = path === href
             return (
               <Link
                 key={href}
                 href={href}
+                aria-current={active ? "page" : undefined}
                 className={
-                  "flex shrink-0 items-center gap-2 rounded-xl px-3 py-2 text-sm transition-colors " +
+                  "target flex shrink-0 items-center gap-2 rounded-xl px-3 py-2 text-sm transition-colors " +
                   (active ? "bg-primary text-surface" : "text-muted hover:bg-subtle hover:text-fg")
                 }
               >
@@ -97,7 +132,7 @@ function Topbar({ path }: { path: string }) {
 // --- rail ---
 function Rail({ path }: { path: string }) {
   return (
-    <aside className="flex w-16 shrink-0 flex-col items-center gap-2 border-r border-border bg-surface py-4">
+    <aside aria-label="Principal" className="flex w-16 shrink-0 flex-col items-center gap-2 border-r border-border bg-surface py-4">
       <div className="mb-6">
         <Marca compact />
       </div>
@@ -109,6 +144,7 @@ function Rail({ path }: { path: string }) {
             href={href}
             title={label}
             aria-label={label}
+            aria-current={active ? "page" : undefined}
             className={
               "flex h-11 w-11 items-center justify-center rounded-xl transition-colors " +
               (active ? "bg-primary text-surface" : "text-muted hover:bg-subtle hover:text-fg")

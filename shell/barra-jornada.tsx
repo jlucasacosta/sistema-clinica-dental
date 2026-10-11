@@ -1,4 +1,3 @@
-"use client"
 // barra-estado-jornada · ARQUETIPO DE KPI NUEVO.
 // Una sola barra horizontal, partida en segmentos PROPORCIONALES al conteo de cada
 // estado del dia. No es `barra-metas` (que mide progreso contra un objetivo): esto es
@@ -13,7 +12,7 @@ export function BarraEstadoJornada({ jornada }: { jornada: Jornada }) {
   return (
     <div>
       <div className="flex items-baseline justify-between">
-        <p className="text-[10px] uppercase tracking-wide text-muted">Turnos de hoy</p>
+        <p className="text-[0.6875rem] uppercase tracking-wide text-muted">Turnos de hoy</p>
         <p className="dato font-heading text-2xl font-bold leading-none">{total}</p>
       </div>
 

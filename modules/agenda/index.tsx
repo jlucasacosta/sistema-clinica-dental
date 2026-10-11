@@ -1,8 +1,9 @@
 "use client"
 import { useEffect, useState } from "react"
+import { Armchair, Ban, CalendarCheck, Check, UserX, type LucideIcon } from "lucide-react"
 import { getSillones, getDentistas, getTurnosDia, APERTURA, CIERRE, type Sillon, type Dentista, type Turno } from "./api"
 import { theme } from "@/shell/theme"
-import { chipTurno, bandaAtencion, hhmm } from "@/shell/dental"
+import { chipTurno, bandaAtencion, hhmm, ESTADOS_TURNO, type EstadoTurno } from "@/shell/dental"
 
 // agenda-sillon-ciclo · ARQUETIPO DE DATOS NUEVO.
 // No es la `grilla-semana` de la barberia con las columnas renombradas. Tres cosas la
@@ -30,17 +31,30 @@ const puntoDentista: Record<string, string> = {
   D3: "bg-info",
 }
 
+// El estado del turno NO viaja solo en el tinte de la banda (cinco /20 casi iguales): cada
+// uno lleva un icono. Mapa literal, igual que el resto de los tonos.
+const iconoTurno: Record<EstadoTurno, LucideIcon> = {
+  atendido: Check,
+  "en sala": Armchair,
+  confirmado: CalendarCheck,
+  ausente: UserX,
+  cancelado: Ban,
+}
+
 const pct = (min: number) => ((min - APERTURA) / MINUTOS) * 100
 
 function BloqueTurno({
   t,
+  profesional,
   onSeleccionar,
   seleccionado,
 }: {
   t: Turno
+  profesional?: string
   onSeleccionar: () => void
   seleccionado: boolean
 }) {
+  const Icono = iconoTurno[t.estado]
   // El bloque ocupa el sillon durante montaje + atencion + esterilizacion.
   const { montaje, esterilizacion } = theme.ciclo
   const total = montaje + t.duracion + esterilizacion
@@ -52,7 +66,10 @@ function BloqueTurno({
 
   return (
     <button
+      type="button"
       onClick={onSeleccionar}
+      aria-pressed={seleccionado}
+      aria-label={`${t.paciente}, ${hhmm(t.inicio)}, ${t.tratamiento}, ${t.estado}${profesional ? ", " + profesional : ""}`}
       style={{ top: top + "%", height: alto + "%" }}
       className={
         "absolute inset-x-0.5 flex flex-col overflow-hidden rounded-lg border-l-[3px] text-left transition-shadow " +
@@ -69,8 +86,11 @@ function BloqueTurno({
         className={"min-h-0 flex-1 px-1.5 py-1 " + bandaAtencion[t.estado]}
         style={{ height: fr(t.duracion) + "%" }}
       >
-        <span className="block truncate text-[11px] font-semibold leading-tight">{t.paciente}</span>
-        <span className="dato block truncate text-[10px] text-muted">
+        <span className="flex items-center justify-between gap-1">
+          <span className="block truncate text-[0.6875rem] font-semibold leading-tight">{t.paciente}</span>
+          <Icono aria-hidden size={12} strokeWidth={2} className="shrink-0" />
+        </span>
+        <span className="dato block truncate text-[0.6875rem] text-fg/80">
           {hhmm(t.inicio)} · {t.tratamiento}
         </span>
       </span>
@@ -120,14 +140,14 @@ export function AgendaPage() {
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="font-heading text-2xl font-bold tracking-tight">Agenda de hoy</h1>
-          <p className="text-[11px] text-muted">
+          <p className="text-[0.6875rem] text-muted">
             Cada columna es un sillon. El bloque ocupa montaje + atencion + esterilizacion.
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-4">
           {dentistas.map((d) => (
-            <span key={d.id} className="flex items-center gap-1.5 text-[11px] text-muted">
-              <span className={"h-2.5 w-2.5 rounded-full " + puntoDentista[d.id]} />
+            <span key={d.id} className="flex items-center gap-1.5 text-[0.6875rem] text-muted">
+              <span aria-hidden className={"h-2.5 w-2.5 rounded-full " + puntoDentista[d.id]} />
               {d.nombre}
             </span>
           ))}
@@ -148,7 +168,7 @@ export function AgendaPage() {
                 El espaciador replica el alto del rotulo "Sillon N" de las columnas:
                 sin el, el eje corre mas arriba que los bloques y las horas mienten. */}
             <div className="w-12 shrink-0">
-              <p aria-hidden className="mb-1.5 select-none text-center text-[11px] font-semibold text-transparent">
+              <p aria-hidden className="mb-1.5 select-none text-center text-[0.6875rem] font-semibold text-transparent">
                 .
               </p>
               <div className="relative" style={{ height: ALTO + "rem" }}>
@@ -156,7 +176,7 @@ export function AgendaPage() {
                   <span
                     key={m}
                     style={{ top: pct(m) + "%" }}
-                    className="dato absolute right-1 -translate-y-1/2 text-[10px] text-muted"
+                    className="dato absolute right-1 -translate-y-1/2 text-[0.6875rem] text-muted"
                   >
                     {hhmm(m)}
                   </span>
@@ -166,8 +186,8 @@ export function AgendaPage() {
 
             {sillones.map((s) => (
               <div key={s.id} className="flex-1">
-                <p className="mb-1.5 text-center text-[11px] font-semibold text-muted">{s.nombre}</p>
-                <div className="relative rounded-xl bg-subtle/50" style={{ height: ALTO + "rem" }}>
+                <p className="mb-1.5 text-center text-[0.6875rem] font-semibold text-muted">{s.nombre}</p>
+                <div role="group" aria-label={s.nombre} className="relative rounded-xl bg-subtle/50" style={{ height: ALTO + "rem" }}>
                   {/* reglas horarias */}
                   {horas.map((m) => (
                     <span
@@ -183,6 +203,7 @@ export function AgendaPage() {
                       <BloqueTurno
                         key={t.id}
                         t={t}
+                        profesional={dentistas.find((d) => d.id === t.dentistaId)?.nombre}
                         seleccionado={sel === t.id}
                         onSeleccionar={() => setSel(t.id)}
                       />
@@ -191,6 +212,7 @@ export function AgendaPage() {
                   {/* la linea de AHORA, calculada en cliente */}
                   {ahora !== null && (
                     <span
+                      aria-hidden
                       style={{ top: pct(ahora) + "%" }}
                       className="pointer-events-none absolute inset-x-0 z-10 h-0.5 bg-accent"
                     >
@@ -202,15 +224,23 @@ export function AgendaPage() {
             ))}
           </div>
 
-          <div className="mt-3 flex flex-wrap gap-4 border-t border-border pt-3 text-[10px] text-muted">
+          <div className="mt-3 flex flex-wrap gap-4 border-t border-border pt-3 text-[0.6875rem] text-muted">
             <span className="flex items-center gap-1.5">
-              <span className="trama h-3 w-5 rounded bg-subtle" /> montaje / esterilizacion
+              <span aria-hidden className="trama h-3 w-5 rounded bg-subtle" /> montaje / esterilizacion
             </span>
+            {ESTADOS_TURNO.map((e) => {
+              const Icono = iconoTurno[e]
+              return (
+                <span key={e} className="flex items-center gap-1.5">
+                  <span className={"flex h-3 w-5 items-center justify-center rounded text-fg " + bandaAtencion[e]}>
+                    <Icono aria-hidden size={10} strokeWidth={2} />
+                  </span>{" "}
+                  {e}
+                </span>
+              )
+            })}
             <span className="flex items-center gap-1.5">
-              <span className="h-3 w-5 rounded bg-success/20" /> atencion
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="h-3 w-0.5 bg-accent" /> ahora
+              <span aria-hidden className="h-3 w-0.5 bg-accent" /> ahora
             </span>
           </div>
         </div>
@@ -222,12 +252,12 @@ export function AgendaPage() {
             <div className="space-y-3">
               <div>
                 <p className="font-heading text-base font-bold leading-tight">{turno.paciente}</p>
-                <p className="dato text-[11px] text-muted">
+                <p className="dato text-[0.6875rem] text-muted">
                   {hhmm(turno.inicio)} a {hhmm(turno.inicio + turno.duracion)} · {turno.duracion} min
                 </p>
               </div>
               <span className={"chip " + chipTurno[turno.estado]}>{turno.estado}</span>
-              <dl className="space-y-1.5 border-t border-border pt-3 text-[11px]">
+              <dl className="space-y-1.5 border-t border-border pt-3 text-[0.6875rem]">
                 <div className="flex justify-between gap-2">
                   <dt className="text-muted">Tratamiento</dt>
                   <dd className="text-right font-medium">{turno.tratamiento}</dd>
@@ -254,13 +284,13 @@ export function AgendaPage() {
                 </div>
               </dl>
               {turno.estado === "ausente" && (
-                <p className="rounded-xl bg-danger/10 p-2 text-[11px] leading-snug text-danger">
+                <p className="rounded-xl bg-danger/10 p-2 text-[0.6875rem] leading-snug text-danger">
                   No vino. El sillon quedo vacio {turno.duracion} minutos: esa hora no se recupera.
                 </p>
               )}
             </div>
           ) : (
-            <p className="py-10 text-center text-[11px] text-muted">Elegi un turno de la grilla.</p>
+            <p className="py-10 text-center text-[0.6875rem] text-muted">Elegi un turno de la grilla.</p>
           )}
         </div>
       </div>

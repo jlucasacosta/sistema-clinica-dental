@@ -49,13 +49,29 @@ function rgb(hex: string) {
   return `${(n >> 16) & 255} ${(n >> 8) & 255} ${n & 255}`
 }
 
-export const metadata = { title: "Sistema", description: "Demo" }
+// Mezcla dos hex y devuelve el triplete "R G B". Sirve para derivar variantes del theme
+// (hoy: accent-ink) sin escribir un color a mano.
+function mezclar(a: string, b: string, peso: number) {
+  const [ra, ga, ba] = rgb(a).split(" ").map(Number)
+  const [rb, gb, bb] = rgb(b).split(" ").map(Number)
+  const m = (x: number, y: number) => Math.round(x * (1 - peso) + y * peso)
+  return `${m(ra, rb)} ${m(ga, gb)} ${m(ba, bb)}`
+}
+
+// Titulo por pagina: cada app/<ruta>/page.tsx exporta su `metadata.title` y el template
+// le suma la marca. Sin esto las seis rutas se llaman igual (WCAG 2.4.2).
+export const metadata = {
+  title: { default: `${theme.brand.name} · Demo`, template: `%s · ${theme.brand.name}` },
+  description: "Demo frontend con datos de ejemplo. Sin backend conectado.",
+}
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   const c = theme.colors
   const vars = {
     "--primary": rgb(c.primary),
     "--accent": rgb(c.accent),
+    // accent con 45% de fg: texto legible (>=4.5:1) que conserva el tono del acento.
+    "--accent-ink": mezclar(c.accent, c.fg, 0.45),
     "--bg": rgb(c.bg),
     "--surface": rgb(c.surface),
     "--fg": rgb(c.fg),
@@ -80,9 +96,23 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="es">
       <body className={fontClass} style={vars}>
-        <div className={"min-h-screen bg-bg text-fg " + (stacked ? "flex flex-col" : "flex")}>
+        <a
+          href="#contenido"
+          className="sr-only z-50 rounded-xl bg-surface px-4 py-3 text-sm font-semibold text-fg shadow-pop focus:not-sr-only focus:fixed focus:left-3 focus:top-3"
+        >
+          Saltar al contenido
+        </a>
+        {/* sidebar: en movil la nav pasa arriba (columna) y desde md va al costado. */}
+        <div
+          className={
+            "min-h-screen bg-bg text-fg " +
+            (stacked ? "flex flex-col" : theme.nav === "sidebar" ? "flex flex-col md:flex-row" : "flex")
+          }
+        >
           <Nav />
-          <main className="flex-1 overflow-x-hidden p-[var(--pad)]">{children}</main>
+          <main id="contenido" tabIndex={-1} className="min-w-0 flex-1 overflow-x-hidden p-[var(--pad)] outline-none">
+            {children}
+          </main>
         </div>
       </body>
     </html>

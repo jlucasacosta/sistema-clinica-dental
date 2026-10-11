@@ -1,5 +1,5 @@
 # Backend — Mensajes (conversaciones)
-> Asume BACKEND_RULES.md.
+> Guía de implementación completa: docs/IMPLEMENTAR.md.
 
 - Tablas `hilos` y `mensajes`, con `paciente_id` y `motivo` en el hilo.
 - Entrada por webhook de WhatsApp Business. Realtime sobre `mensajes`.

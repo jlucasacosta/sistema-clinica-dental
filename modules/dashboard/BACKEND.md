@@ -1,5 +1,5 @@
 # Backend — Jornada (dashboard)
-> Asume BACKEND_RULES.md.
+> Guía de implementación completa: docs/IMPLEMENTAR.md.
 
 - Sin tablas propias: agrega `turnos`, `tratamientos` y `pacientes`.
 - La barra-estado-jornada es un `count(*) group by estado` sobre los turnos de hoy.

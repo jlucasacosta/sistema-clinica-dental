@@ -76,7 +76,7 @@ export const caraFill: Record<EstadoPieza, string> = {
   "a extraer": "fill-danger/40",
 }
 export const caraStroke: Record<EstadoPieza, string> = {
-  sana: "stroke-border",
+  sana: "stroke-muted", // DISENO.md: sana = contorno muted. stroke-border daba 1.28:1 (1.4.11)
   caries: "stroke-danger",
   obturada: "stroke-info",
   corona: "stroke-warning",
@@ -89,7 +89,7 @@ export const chipEstado: Record<EstadoPieza, string> = {
   caries: "bg-danger/15 text-danger",
   obturada: "bg-info/15 text-info",
   corona: "bg-warning/15 text-warning",
-  endodoncia: "bg-accent/20 text-accent",
+  endodoncia: "bg-accent/20 text-accent-ink", // el coral como texto da 2.4:1; accent-ink 5.3:1
   ausente: "bg-subtle text-muted",
   "a extraer": "bg-danger/15 text-danger",
 }

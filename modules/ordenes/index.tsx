@@ -2,11 +2,10 @@
 import { useEffect, useMemo, useState } from "react"
 import { AlertTriangle, History, Pencil } from "lucide-react"
 import { getFichas, piezasEnVisita, type Ficha } from "./api"
-import { Odontograma, PiezaHeroe, type Pieza } from "@/shell/odontograma"
+import { Odontograma, PiezaHeroe, MuestraEstado, type Pieza } from "@/shell/odontograma"
 import {
   ESTADOS,
   chipEstado,
-  puntoEstado,
   chipOS,
   estadoDePieza,
   esPatologica,
@@ -33,7 +32,7 @@ function BarraPlan({ ficha }: { ficha: Ficha }) {
   return (
     <div>
       <div className="flex items-baseline justify-between">
-        <p className="text-[11px] text-muted">{ficha.plan.nombre}</p>
+        <p className="text-[0.6875rem] text-muted">{ficha.plan.nombre}</p>
         <p className={"dato text-xs font-semibold " + (abandonado ? "text-danger" : "text-fg")}>
           {ficha.plan.sesionesHechas}/{ficha.plan.sesionesTotales} sesiones
         </p>
@@ -45,7 +44,7 @@ function BarraPlan({ ficha }: { ficha: Ficha }) {
         />
       </div>
       {abandonado && (
-        <p className="mt-1.5 flex items-center gap-1 text-[11px] font-semibold text-danger">
+        <p className="mt-1.5 flex items-center gap-1 text-[0.6875rem] font-semibold text-danger">
           <AlertTriangle size={12} strokeWidth={1.5} />
           Plan abandonado: {ficha.diasSinSesion} dias sin sesion
         </p>
@@ -62,6 +61,8 @@ export function OrdenesPage() {
   const [edicion, setEdicion] = useState<Pieza[] | null>(null)
   const [heroe, setHeroe] = useState<number>(46)
   const [pulso, setPulso] = useState<{ fdi: number; cara: Cara } | null>(null)
+  // Mensaje para el lector de pantalla: cada cambio de cara se anuncia (role="status").
+  const [anuncio, setAnuncio] = useState("")
 
   useEffect(() => {
     getFichas().then((fs) => {
@@ -94,11 +95,11 @@ export function OrdenesPage() {
 
   const cambiarCara = (fdi: number, cara: Cara) => {
     const base = edicion ?? piezasHistoricas
+    const nuevo = siguienteEstado((base.find((p) => p.fdi === fdi) as Pieza).caras[cara])
     setEdicion(
-      base.map((p) =>
-        p.fdi === fdi ? { ...p, caras: { ...p.caras, [cara]: siguienteEstado(p.caras[cara]) } } : p,
-      ),
+      base.map((p) => (p.fdi === fdi ? { ...p, caras: { ...p.caras, [cara]: nuevo } } : p)),
     )
+    setAnuncio(`Pieza ${fdi}, cara ${cara}: ${nuevo}`)
     setHeroe(fdi)
     setPulso({ fdi, cara })
   }
@@ -113,10 +114,13 @@ export function OrdenesPage() {
 
   return (
     <div className="space-y-5">
+      <p role="status" className="sr-only">
+        {anuncio}
+      </p>
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="font-heading text-2xl font-bold tracking-tight">Fichas clinicas</h1>
-          <p className="text-[11px] text-muted">
+          <p className="text-[0.6875rem] text-muted">
             Toca una cara para cambiar su estado. Arrastra el historial para ver la boca en el tiempo.
           </p>
         </div>
@@ -124,18 +128,20 @@ export function OrdenesPage() {
 
       <div className="grid gap-4 xl:grid-cols-[15rem_1fr]">
         {/* padron de fichas */}
-        <ul className="surface-card max-h-[38rem] overflow-y-auto p-2">
+        <ul aria-label="Fichas de pacientes" className="surface-card max-h-[38rem] overflow-y-auto p-2">
           {fichas.map((f) => (
             <li key={f.id}>
               <button
+                type="button"
                 onClick={() => setSelId(f.id)}
+                aria-current={f.id === selId ? "true" : undefined}
                 className={
                   "target flex w-full flex-col justify-center rounded-xl px-3 py-2 text-left transition-colors " +
                   (f.id === selId ? "bg-primary/10" : "hover:bg-subtle")
                 }
               >
                 <span className="truncate text-xs font-semibold">{f.paciente}</span>
-                <span className="dato text-[10px] text-muted">
+                <span className="dato text-[0.6875rem] text-muted">
                   {f.id} · {f.edad} años
                 </span>
               </button>
@@ -150,12 +156,12 @@ export function OrdenesPage() {
           <div className="min-w-0 space-y-4">
             {/* banner de paciente: la estructura de pagina del sistema */}
             <div className="surface-card flex flex-wrap items-center gap-4 p-4">
-              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary/15 font-heading text-xl font-bold text-primary">
+              <span aria-hidden className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary/15 font-heading text-xl font-bold text-primary">
                 {ficha.paciente[0]}
               </span>
               <div className="min-w-0 flex-1">
                 <h2 className="font-heading text-lg font-bold leading-tight">{ficha.paciente}</h2>
-                <p className="dato text-[11px] text-muted">
+                <p className="dato text-[0.6875rem] text-muted">
                   {ficha.edad} años · {ficha.obraSocial} · ultima visita {ficha.ultimaVisita}
                 </p>
                 <div className="mt-1.5 flex flex-wrap gap-1.5">
@@ -180,18 +186,22 @@ export function OrdenesPage() {
                   <h3 className="font-heading text-sm font-bold">Odontograma</h3>
                   <div className="flex items-center gap-1.5">
                     <button
+                      type="button"
+                      aria-pressed={modo === "timelapse"}
                       onClick={() => setModo("timelapse")}
                       className={
-                        "chip transition-colors " +
+                        "chip target px-3 transition-colors " +
                         (modo === "timelapse" ? "bg-primary text-surface" : "bg-subtle text-muted hover:text-fg")
                       }
                     >
                       <History size={11} strokeWidth={1.5} /> historial
                     </button>
                     <button
+                      type="button"
+                      aria-pressed={modo === "editar"}
                       onClick={entrarAEditar}
                       className={
-                        "chip transition-colors " +
+                        "chip target px-3 transition-colors " +
                         (modo === "editar" ? "bg-primary text-surface" : "bg-subtle text-muted hover:text-fg")
                       }
                     >
@@ -212,10 +222,10 @@ export function OrdenesPage() {
                 {/* EL SCRUBBER: el componente estrella. */}
                 <div className="mt-5 border-t border-border pt-4">
                   <div className="flex items-baseline justify-between">
-                    <p className="text-[11px] font-semibold uppercase tracking-wide text-muted">
+                    <p className="text-[0.6875rem] font-semibold uppercase tracking-wide text-muted">
                       Historial clinico
                     </p>
-                    <p className="dato text-[11px] text-muted">
+                    <p className="dato text-[0.6875rem] text-muted">
                       visita {visita + 1} de {ficha.visitas.length}
                     </p>
                   </div>
@@ -226,35 +236,36 @@ export function OrdenesPage() {
                     step={1}
                     value={visita}
                     aria-label="Linea de tiempo de la historia clinica"
+                    aria-valuetext={`Visita ${visita + 1} de ${ficha.visitas.length}, ${ficha.visitas[visita].fecha}`}
                     onChange={(e) => {
                       setVisita(Number(e.target.value))
                       setModo("timelapse")
                       setEdicion(null)
                     }}
-                    className="mt-2 w-full accent-primary"
+                    className="mt-2 h-11 w-full cursor-pointer accent-primary"
                   />
                   <div className="mt-1 flex items-baseline justify-between gap-3">
                     <p className="dato text-xs font-semibold text-primary">
                       {ficha.visitas[visita].fecha}
                     </p>
-                    <p className="text-[11px] text-muted">{ficha.visitas[visita].profesional}</p>
+                    <p className="text-[0.6875rem] text-muted">{ficha.visitas[visita].profesional}</p>
                   </div>
-                  <p className="mt-1 text-[11px] leading-snug text-muted">{ficha.visitas[visita].nota}</p>
+                  <p className="mt-1 text-[0.6875rem] leading-snug text-muted">{ficha.visitas[visita].nota}</p>
                 </div>
               </div>
 
               {/* la PIEZA HEROE + el contador que sube */}
               <div className="surface-card flex flex-col gap-4 p-4">
                 <div>
-                  <p className="text-[10px] uppercase tracking-wide text-muted">Piezas con patologia</p>
-                  <p key={afectadas} className="contador-sube font-heading text-4xl font-bold leading-none text-danger">
+                  <p className="text-[0.6875rem] uppercase tracking-wide text-muted">Piezas con patologia</p>
+                  <p key={afectadas} aria-live="polite" className="contador-sube font-heading text-4xl font-bold leading-none text-danger">
                     {afectadas}
                   </p>
                 </div>
 
                 <div className="border-t border-border pt-3">
-                  <p className="text-[11px] font-semibold">{nombrePieza(piezaHeroe.fdi)}</p>
-                  <p className="mb-2 text-[10px] text-muted">
+                  <p className="text-[0.6875rem] font-semibold">{nombrePieza(piezaHeroe.fdi)}</p>
+                  <p className="mb-2 text-[0.6875rem] text-muted">
                     {modo === "editar" ? "toca una cara para cambiarla" : "modo lectura"}
                   </p>
                   <PiezaHeroe
@@ -266,16 +277,16 @@ export function OrdenesPage() {
                 </div>
 
                 <div className="border-t border-border pt-3">
-                  <p className="mb-2 text-[10px] uppercase tracking-wide text-muted">Referencias</p>
+                  <p className="mb-2 text-[0.6875rem] uppercase tracking-wide text-muted">Referencias</p>
                   <ul className="space-y-1">
                     {ESTADOS.map((e) => (
-                      <li key={e} className="flex items-center gap-2 text-[11px]">
-                        <span className={"h-2.5 w-2.5 rounded-full " + puntoEstado[e]} />
+                      <li key={e} className="flex items-center gap-2 text-[0.6875rem]">
+                        <MuestraEstado estado={e} />
                         <span className="text-muted">{e}</span>
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-2 text-[10px] leading-snug text-muted">
+                  <p className="mt-2 text-[0.6875rem] leading-snug text-muted">
                     &quot;a extraer&quot; se distingue de &quot;caries&quot; por la cruz, no por el color.
                   </p>
                 </div>
@@ -285,7 +296,7 @@ export function OrdenesPage() {
             {/* el estado de cada pieza patologica, en chips semanticos */}
             <div className="surface-card p-4">
               <h3 className="mb-2 font-heading text-sm font-bold">Piezas comprometidas</h3>
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap gap-2">
                 {piezas
                   .filter((p) => estadoDePieza(p.caras) !== "sana")
                   .map((p) => {
@@ -293,15 +304,16 @@ export function OrdenesPage() {
                     return (
                       <button
                         key={p.fdi}
+                        type="button"
                         onClick={() => setHeroe(p.fdi)}
-                        className={"chip transition-transform hover:scale-105 " + chipEstado[e]}
+                        className={"chip target px-3 transition-transform hover:scale-105 " + chipEstado[e]}
                       >
                         <span className="fdi">{p.fdi}</span> {e}
                       </button>
                     )
                   })}
                 {piezas.every((p) => estadoDePieza(p.caras) === "sana") && (
-                  <p className="text-[11px] text-muted">Boca sana en esta visita.</p>
+                  <p className="text-[0.6875rem] text-muted">Boca sana en esta visita.</p>
                 )}
               </div>
             </div>

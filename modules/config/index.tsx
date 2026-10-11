@@ -1,8 +1,9 @@
 "use client"
-import { useState } from "react"
+import { useId, useState } from "react"
 import { ChevronDown } from "lucide-react"
 import { theme } from "@/shell/theme"
-import { ESTADOS, puntoEstado } from "@/shell/dental"
+import { ESTADOS } from "@/shell/dental"
+import { MuestraEstado } from "@/shell/odontograma"
 
 // ACORDEON: secciones colapsables. Config no es heroe: el reuso de arquetipo aca es
 // invisible y el abogado del diablo lo aprobo. Todo sale de shell/theme.ts.
@@ -10,9 +11,9 @@ import { ESTADOS, puntoEstado } from "@/shell/dental"
 function Fila({ label, value, swatch }: { label: string; value: string; swatch?: boolean }) {
   return (
     <div className="flex items-center justify-between border-b border-border py-2 last:border-0">
-      <span className="text-[11px] text-muted">{label}</span>
-      <span className="dato flex items-center gap-2 text-[11px] font-medium">
-        {swatch && <span className="h-4 w-4 rounded border border-border" style={{ background: value }} />}
+      <span className="text-[0.6875rem] text-muted">{label}</span>
+      <span className="dato flex items-center gap-2 text-[0.6875rem] font-medium">
+        {swatch && <span aria-hidden className="h-4 w-4 rounded border border-border" style={{ background: value }} />}
         {value}
       </span>
     </div>
@@ -21,18 +22,25 @@ function Fila({ label, value, swatch }: { label: string; value: string; swatch?:
 
 function Seccion({ titulo, children, abierta, nota }: { titulo: string; children: React.ReactNode; abierta?: boolean; nota?: string }) {
   const [open, setOpen] = useState(!!abierta)
+  const panel = useId()
   return (
     <section className="surface-card overflow-hidden">
-      <button
-        onClick={() => setOpen((o) => !o)}
-        className="target flex w-full items-center justify-between px-4 py-3 text-left transition-colors hover:bg-subtle"
-      >
-        <h2 className="font-heading text-xs font-bold uppercase tracking-wide">{titulo}</h2>
-        <ChevronDown size={16} strokeWidth={1.5} className={"text-muted transition-transform " + (open ? "rotate-180" : "")} />
-      </button>
+      {/* h2 > button: el encabezado sigue siendo encabezado y el boton expone abierto/cerrado */}
+      <h2 className="font-heading text-xs font-bold uppercase tracking-wide">
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-expanded={open}
+          aria-controls={panel}
+          className="target flex w-full items-center justify-between px-4 py-3 text-left uppercase tracking-wide transition-colors hover:bg-subtle"
+        >
+          {titulo}
+          <ChevronDown aria-hidden size={16} strokeWidth={1.5} className={"text-muted transition-transform " + (open ? "rotate-180" : "")} />
+        </button>
+      </h2>
       {open && (
-        <div className="border-t border-border px-4 py-3">
-          {nota && <p className="mb-2 text-[10px] leading-snug text-muted">{nota}</p>}
+        <div id={panel} className="border-t border-border px-4 py-3">
+          {nota && <p className="mb-2 text-[0.6875rem] leading-snug text-muted">{nota}</p>}
           {children}
         </div>
       )}
@@ -99,8 +107,8 @@ export function ConfigPage() {
           <Seccion titulo="Estados de la pieza" nota="Siete estados contra cuatro semanticos: 'a extraer' se distingue de 'caries' por la cruz, no por el color.">
             <ul className="grid grid-cols-2 gap-1.5 pt-1">
               {ESTADOS.map((e) => (
-                <li key={e} className="flex items-center gap-2 text-[11px]">
-                  <span className={"h-2.5 w-2.5 rounded-full " + puntoEstado[e]} />
+                <li key={e} className="flex items-center gap-2 text-[0.6875rem]">
+                  <MuestraEstado estado={e} />
                   <span className="text-muted">{e}</span>
                 </li>
               ))}
@@ -111,7 +119,7 @@ export function ConfigPage() {
             <Fila label="Obras sociales" value="mock (sin backend)" />
             <Fila label="WhatsApp" value="mock (sin backend)" />
             <Fila label="Facturacion" value="mock (sin backend)" />
-            <p className="pt-2 text-[10px] leading-snug text-muted">
+            <p className="pt-2 text-[0.6875rem] leading-snug text-muted">
               Demo frontend con datos de ejemplo. Sin backend conectado. Todo el diseño sale de shell/theme.ts.
             </p>
           </Seccion>

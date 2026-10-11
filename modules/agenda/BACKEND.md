@@ -1,5 +1,5 @@
 # Backend — Agenda por sillon
-> Asume BACKEND_RULES.md.
+> Guía de implementación completa: docs/IMPLEMENTAR.md.
 
 - Tablas `sillones`, `dentistas`, `turnos` (sillon_id, dentista_id, paciente_id,
   inicio timestamptz, duracion_min, estado, obra_social).
