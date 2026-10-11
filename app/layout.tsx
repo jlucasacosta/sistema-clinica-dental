@@ -110,7 +110,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           }
         >
           <Nav />
-          <main id="contenido" tabIndex={-1} className="min-w-0 flex-1 overflow-x-hidden p-[var(--pad)] outline-none">
+          <main id="contenido" tabIndex={-1} className="relative min-w-0 flex-1 overflow-x-hidden p-[var(--pad)] outline-none">
             {children}
           </main>
         </div>
