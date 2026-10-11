@@ -613,6 +613,15 @@ ok(
 )
 
 // 5. mensajes
+// m.hora es "HH:MM" (hoy) o una etiqueta relativa del demo: "hace 4 m", "ayer", "hace 8 d", "hace 1 a".
+const DIA = 86_400_000
+const enviadoEn = (hora) => {
+  if (/^\d{1,2}:\d{2}$/.test(hora)) return new Date(`${hoy}T${hora.padStart(5, "0")}:00`)
+  if (hora === "ayer") return new Date(Date.now() - DIA)
+  const r = hora.match(/^hace (\d+) (m|h|d|a)$/) // minutos, horas, dias, anios
+  if (!r) throw new Error(`mensajes: hora no reconocida "${hora}"`)
+  return new Date(Date.now() - Number(r[1]) * { m: 60_000, h: 3_600_000, d: DIA, a: 365 * DIA }[r[2]])
+}
 ok(
   await sb.from("hilos").upsert(
     conv.hilos.map((h) => ({ id: h.id, paciente_id: idPaciente.get(h.paciente), motivo: h.motivo, canal: h.canal })),
@@ -626,7 +635,7 @@ for (const h of conv.hilos) {
         hilo_id: h.id,
         de: m.de,
         texto: m.texto,
-        enviado_en: new Date(`${hoy}T${m.hora}:00`).toISOString(),
+        enviado_en: enviadoEn(m.hora).toISOString(),
         leido: i < h.mensajes.length - h.sinLeer, // los ultimos "sinLeer" quedan sin leer
       })),
     ),
